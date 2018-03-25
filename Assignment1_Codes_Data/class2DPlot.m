@@ -20,4 +20,3 @@ for c=unique(Y)',
   H=plot(X(find(Y==c),1),X(find(Y==c),2),'o','markersize',7,'color',cmap(col,:),'markerfacecolor',cmap(col,:)); 
   %set(H,'markerfacecolor',cmap(col,:));
 end;
-
