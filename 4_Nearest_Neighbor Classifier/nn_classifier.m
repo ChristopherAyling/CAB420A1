@@ -46,4 +46,10 @@ for i=1:length(ks);
     errors = [errors, sum(Yhat == Ytest)];
 end
 figure('name', 'Errors vs K');
-bar(errors);
+hold on
+title('Errors vs K Using Iris Dataset');
+xlabel('K');
+ylabel('Errors');
+plot(errors);
+xticklabels(ks)
+hold off
