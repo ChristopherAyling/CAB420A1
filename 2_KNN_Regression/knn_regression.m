@@ -19,8 +19,8 @@ learner = knnRegress(1,Xtrain, Ytrain);
 Yhat = predict(learner, Xtest);
 figure('name', 'Knn Testing');
 hold on
-plot(Xtest, Ytest, 'ro');
-plot(Xtest, Yhat, 'bo');
+plot(Xtest, Ytest, 'bo');
+plot(Xtest, Yhat, 'ro');
 hold off
 
 %% b) Plot function for several values of K

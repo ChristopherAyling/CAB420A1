@@ -16,7 +16,7 @@
         for j=1:K
             kclosest_vals = [kclosest_vales, Ytrain(idx(j))];
         end
-        Yte = kclosest_vals/K;
-%         Yte(i)=obj.Ytrain(idx(1));       % predict ith test example's value from nearest neighbors
+        kclosest_vals/K
+        Yte(i)=obj.Ytrain(idx(1));       % predict ith test example's value from nearest neighbors
       end;
     end
