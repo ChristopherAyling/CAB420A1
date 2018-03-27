@@ -1,4 +1,8 @@
 %% (a)
+%Clean up
+clc
+clear
+close all
 %Load in and set up variables
 mTrain = load('data/mcycleTrain.txt');
 ytr = mTrain(:,1); 
