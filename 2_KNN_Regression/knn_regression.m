@@ -27,6 +27,7 @@ figure('name', 'Knn Testing');
 hold on
 plot(Xtest, Ytest, 'bo');
 plot(Xtest, Yhat, 'ro');
+legend('Y test', 'Y hat');
 hold off
 
 %% b) Plot function for several values of K

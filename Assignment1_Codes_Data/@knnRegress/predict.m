@@ -5,7 +5,7 @@
       classes = unique(obj.Ytrain);          % figure out how many classes & their labels
       Yte = repmat(obj.Ytrain(1), [Nte,1]);  % make Ytest the same data type as Ytrain
       K = min(obj.K, Ntr);                  % can't have more than Ntrain neighbors
-      for i=1:Nte,                          % For each test example:
+      for i=1:Nte                          % For each test example:
         dist = sum( bsxfun( @minus, obj.Xtrain, Xte(i,:) ).^2 , 2);  % compute sum of squared differences
         %dist = sum( (obj.Xtrain - repmat(Xte(i,:),[Ntr,1]) ).^2 , 2);  % compute sum of squared differences
         [tmp,idx] = sort(dist);              % find nearest neighbors over Xtrain (dimension 2)
@@ -14,9 +14,9 @@
 %         error('You should write prediction code here');
         kclosest_vals = [];
         for j=1:K
-            kclosest_vals = [kclosest_vales, Ytrain(idx(j))];
+            kclosest_vals = [kclosest_vals, obj.Ytrain(idx(j))];
         end
-        Yte = kclosest_vals/K;
+        Yte(i) = sum(kclosest_vals)/K;
 %         Yte(i)=obj.Ytrain(idx(1));       % predict ith test example's value from nearest neighbors
       end;
     end
