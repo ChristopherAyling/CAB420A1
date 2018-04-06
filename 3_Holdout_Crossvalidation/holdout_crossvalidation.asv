@@ -17,22 +17,22 @@ MSE1 = zeros(100, 1); % initalise a vector for MSE of each k value
 
 for k=1:100 % iterate on each k value
     learner = knnRegress(k, xtr, ytr); % create the learner using k
-    yhat = predict(learner, xtst); % predict and find MSE relative to test data
+    yhat = predict(learner, xtst); % predict and find MSE relative to 
     MSE1(k) = mean((yhat - ytst).^2);
 end 
 figure;
-loglog(1:100, MSE1); % plot on a loglog graph
+loglog(1:100, MSE1);
 
 
-%% MSE vs K using all training data 
+
 ytr = mTrain(:,1); % all training data examples
 xtr = mTrain(:,2);
 MSE2 = zeros(100, 1); % initalise a vector for MSE of each k value
 
-for k=1:100 % iterate on each k value
-    learner = knnRegress(k, xtr, ytr); % create the learner using k
-    yhat = predict(learner, xtst); % predict and find MSE relative to test data
+for k=1:100
+    learner = knnRegress(k, xtr, ytr); % k=1
+    yhat = predict(learner, xtst);
     MSE2(k) = mean((yhat - ytst).^2);
 end 
 figure;
-loglog(1:100, MSE2); % plot on a loglog graph
+loglog(1:100, MSE2);
