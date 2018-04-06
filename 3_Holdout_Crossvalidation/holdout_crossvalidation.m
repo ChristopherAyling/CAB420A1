@@ -21,8 +21,8 @@ for k=1:100 % iterate on each k value
     MSE1(k) = mean((yhat - ytst).^2);
 end 
 figure;
-loglog(1:100, MSE1); % plot on a loglog graph
-
+loglog(1:100, MSE1, 'r'); % plot on a loglog graph
+hold on;
 
 %% MSE vs K using all training data 
 ytr = mTrain(:,1); % all training data examples
@@ -34,5 +34,21 @@ for k=1:100 % iterate on each k value
     yhat = predict(learner, xtst); % predict and find MSE relative to test data
     MSE2(k) = mean((yhat - ytst).^2);
 end 
-figure;
-loglog(1:100, MSE2); % plot on a loglog graph
+loglog(1:100, MSE2, 'b'); % plot on a loglog graph
+
+%% 4-fold Cross-validation
+MSE3 = zeros(100, 1); % initalise a vector for MSE of each k value
+for k=1:100 % test for 100 values of k
+    MSEtemp = zeros(4, 1); % temp mse array for each i (averaged for each k)
+    for i=1:4
+        m = i*20; n = m-19; % local bounds
+        iTest = mTrain(n:m,:); % 20 indicies for testing
+        iTrain = setdiff(mTrain, iTest, 'rows'); % rest for training
+        learner = knnRegress(k, iTrain(:,2), iTrain(:,1)); % train the learner
+        yhat = predict(learner, iTest(:,2)); % predict at testing x values
+        MSEtemp(i) = mean((yhat - iTest(:,1)).^2); 
+    end
+    MSE3(k) = mean(MSEtemp); % average the MSE 
+end
+loglog(1:100, MSE3, 'm'); % plot on a loglog graph
+
