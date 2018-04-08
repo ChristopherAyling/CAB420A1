@@ -37,9 +37,8 @@ hold on
 learner = knnRegress(1,Xtrain, Ytrain);
 for i=1:length(ks)
     learner = knnRegress(ks(i),Xtrain, Ytrain);
-    stairs(Xs, predict(learner, Xs), '-', 'linewidth', 5);
+    plot(Xs, predict(learner, Xs), '-x');
 end
-title('kNN for values of K')
 legend(cellstr(int2str(ks')))
 hold off
 
