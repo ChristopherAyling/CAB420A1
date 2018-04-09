@@ -43,7 +43,7 @@ errors = [];
 for i=1:length(ks);
     learner = knnClassify(ks(i), Xtrain, Ytrain);
     Yhat = predict(learner, Xtest);
-    errors = [errors, sum(Yhat == Ytest)];
+    errors = [errors, -sum(Yhat == Ytest)];
 end
 figure('name', 'Errors vs K');
 hold on
