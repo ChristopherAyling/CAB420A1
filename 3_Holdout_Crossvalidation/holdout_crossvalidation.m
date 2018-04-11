@@ -34,7 +34,8 @@ for k=1:100 % iterate on each k value
     yhat = predict(learner, xtst); % predict and find MSE relative to test data
     MSE2(k) = mean((yhat - ytst).^2);
 end 
-loglog(1:100, MSE2, 'b'); % plot on a loglog graph
+
+loglog(1:100, MSE2, 'b'); % plot on the loglog graph
 
 %% 4-fold Cross-validation
 MSE3 = zeros(100, 1); % initalise a vector for MSE of each k value
@@ -50,5 +51,13 @@ for k=1:100 % test for 100 values of k
     end
     MSE3(k) = mean(MSEtemp); % average the MSE 
 end
-loglog(1:100, MSE3, 'm'); % plot on a loglog graph
 
+loglog(1:100, MSE3, 'm'); % plot on the loglog graph
+
+%% Figure beautification
+xlabel('K value');
+ylabel('MSE');
+legend('Only using first 20 training data examples', ...
+    'All training data examples', ...
+    'All training data examples with 4-fold Cross-validation');
+title('MSE on different K values');
