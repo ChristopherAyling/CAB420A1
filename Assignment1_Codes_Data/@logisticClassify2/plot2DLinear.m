@@ -7,18 +7,21 @@ function plot2DLinear(obj, X, Y)
   if (d~=2); error('Sorry -- plot2DLogistic only works on 2D data...'); end;
 
   %% Plot X seperately (by Y)
-  classes = getClasses(obj);
+  classes = getClasses(obj); % get the classes
   figure;
   hold on;
   
-  for i = 1:size(classes)
-      plot(X(Y==classes(i),2), X(Y==1,1));
+  for i = 1:size(classes) % loop over the classes
+      plot(X(Y==classes(i),2), X(Y==classes(i),1), '.'); % plot each point in this class
   end;
-      
   
   %% Plot decision boundary
-  b = sign(getWeights(obj)'*[1 X]);
-  plot(X, b, '-');
+  %b = sign(getWeights(obj).*[ones(size(X,1),1), X]);
+  wts = getWeights(obj);
+  x = linspace(min(X(:,2)), max(X(:,2))); 
+  y = -(wts(2)/wts(3))*x - (wts(1)/wts(3)); % re-arranged formula of theta'X=0
   
+  p = plot(x,y); % plotting in a way that doesn't change axis
+  set(p, 'YLimInclude', 'off');
   
-  
+ 

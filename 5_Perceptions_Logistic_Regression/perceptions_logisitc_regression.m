@@ -34,3 +34,4 @@ learner=setClasses(learner, unique(YA)); % define class labels using YA or YB
 wts = [0.5 1 -0.25];
 learner=setWeights(learner, wts); % set the learner's parameters
 plot2DLinear(learner, XA, YA)
+
