@@ -6,4 +6,12 @@ function plot2DLinear(obj, X, Y)
   [n,d] = size(X);
   if (d~=2) error('Sorry -- plot2DLogistic only works on 2D data...'); end;
 
-  %%% TODO: Fill in the rest of this function...  
+  %% Plot X seperately (by Y)
+  figure;
+  plot(X(Y==1,2), X(Y==1,1), 'b.');
+  hold on;
+  plot(X(Y~=1,2), X(Y~=1,1), 'r.');
+  
+  %% Plot decision boundary
+  prediction = predict(obj, X);
+  
