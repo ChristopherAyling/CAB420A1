@@ -4,14 +4,19 @@ function plot2DLinear(obj, X, Y)
 %   wts are 1x3,  wts(1)+wts(2)*X(1)+wts(3)*X(2)
 %
   [n,d] = size(X);
-  if (d~=2) error('Sorry -- plot2DLogistic only works on 2D data...'); end;
+  if (d~=2); error('Sorry -- plot2DLogistic only works on 2D data...'); end;
 
   %% Plot X seperately (by Y)
+  classes = getClasses(obj);
   figure;
-  plot(X(Y==1,2), X(Y==1,1), 'b.');
   hold on;
-  plot(X(Y~=1,2), X(Y~=1,1), 'r.');
+  
+  for i = 1:size(classes)
+      plot(X(Y==classes(i),2), X(Y==1,1));
+  end;
+      
   
   %% Plot decision boundary
-  prediction = predict(obj, X);
+  b = sign(getWeights(obj)'*[1 X]); 
+  plot(X, b, '-'); 
   
