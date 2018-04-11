@@ -28,9 +28,12 @@ xlabel('Sepal Length');
 ylabel('Sepal Width');
 
 %% b)
+approximation = @(x1, x2) sign(0.5 + (1*x1) + (-0.25*x2));
+
 
 learner=logisticClassify2(); % create "blank" learner
 learner=setClasses(learner, unique(YA)); % define class labels using YA or YB
-wts = [0.5 1 -0.25];
+wts = [0.5 1 -0.25]; % TODO: fill in values
 learner=setWeights(learner, wts); % set the learner's parameters
-plot2DLinear(learner, XA, YA)
+plot2DLinear(learner, X, Y)
+

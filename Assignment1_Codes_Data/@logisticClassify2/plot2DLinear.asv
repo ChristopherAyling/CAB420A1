@@ -14,7 +14,6 @@ function plot2DLinear(obj, X, Y)
   
   %% Plot decision boundary
   b = sign(getWeights(obj)'*[1 X]);
-  plot(X, b, '-');
   
   
   
