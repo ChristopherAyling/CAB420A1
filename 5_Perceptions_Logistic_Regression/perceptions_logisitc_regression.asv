@@ -22,7 +22,7 @@ xlabel('Sepal Length');
 ylabel('Sepal Width');
 % Plot class 1 vs 2
 figure;
-plot(XB(:,1), XB(:,2), 'b.');
+plot(XB(:,2), XB(:,1), 'b.');
 title('Class 1 vs Class 2 (Non-Separable)');
 xlabel('Sepal Length');
 ylabel('Sepal Width');

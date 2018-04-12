@@ -6,5 +6,5 @@ function Yte = predict(obj,Xte)
 
 wts = getWeights(obj);
 Yte = sign(wts(1) + wts(2)*Xte(:,1) + wts(3)*Xte(:,2));
-Yte(Yte==-1) = obj.classes(1);
+Yte(Yte==0) = obj.classes(1);
 Yte(Yte==1) = obj.classes(2);
