@@ -27,15 +27,20 @@ title('Class 1 vs Class 2 (Non-Separable)');
 xlabel('Sepal Length');
 ylabel('Sepal Width');
 
-%% Test @logisticClassify2/plot2DLinear.m
+%% Plot decision boundry using provided weights
 
-learner=logisticClassify2(); % create "blank" learner
-learner=setClasses(learner, unique(YA)); % define class labels using YA or YB
-wts = [0.5 1 -0.25];
-learner=setWeights(learner, wts); % set the learner's parameters
-plot2DLinear(learner, XA, YA);
+wts = [0.5 1 -0.25]; % set up the weights
+learnerA = logisticClassify2(); % create "blank" learners
+learnerB = logisticClassify2();
+learnerA = setClasses(learnerA, unique(YA)); % define class labels 
+learnerB = setClasses(learnerB, unique(YB));
+
+learnerA=setWeights(learnerA, wts); % set the learner's parameters
+learnerB=setWeights(learnerB, wts);
+plot2DLinear(learnerA, XA, YA); % plot
+plot2DLinear(learnerB, XB, YB); 
 
 
-%% Test @logisticClassify2/predict.m
-
-err(learner, XA, YA)
+%% Calculate error rate
+errorRateA = err(learnerA, XA, YA)
+errorRateB = err(learnerB, XB, YB)

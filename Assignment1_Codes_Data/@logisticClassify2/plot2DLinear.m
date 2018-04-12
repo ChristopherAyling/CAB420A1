@@ -24,4 +24,8 @@ function plot2DLinear(obj, X, Y)
   p = plot(x,y); % plotting in a way that doesn't change axis
   set(p, 'YLimInclude', 'off');
   
- 
+  %% Some Beautification
+  xlabel('Sepal Length');
+  ylabel('Sepal Width');
+  title('Decision Boundry');
+  legend('Class 1', 'Class 2', 'Decision Boundry');
