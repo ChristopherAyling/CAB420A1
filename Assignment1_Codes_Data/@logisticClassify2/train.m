@@ -52,7 +52,7 @@ function obj = train(obj, X, Y, varargin)
 iter=1; Jsur=zeros(1,stopIter); J01=zeros(1,stopIter); done=0; 
 while (~done) 
   step = stepsize/iter;               % update step-size and evaluate current loss values
-  Jsur(iter) = inf;   %%% TODO: compute surrogate (neg log likelihood) loss
+  Jsur(iter) = 1/n*sum(-Y*log(1+exp(-obj.wts*X)));   %%% TODO: compute surrogate (neg log likelihood) loss
   J01(iter) = err(obj,X,Yin);
 
   if (plotFlag), switch d,            % Plots to help with visualization
@@ -64,10 +64,11 @@ while (~done)
 
   for j=1:n,
     % Compute linear responses and activation for data point j
-    %%% TODO ^^^
+    linResponse = obj.wts * X(j,1);
+    
 
     % Compute gradient:
-    %%% TODO ^^^
+    grad = ((((obj.wts * Y(j))' * exp(linResponse)) + (X(j)*(1-Y(j))))./exp(linResponse)+1) + sum(2*obj.wts)
 
     obj.wts = obj.wts - step * grad;      % take a step down the gradient
   end;

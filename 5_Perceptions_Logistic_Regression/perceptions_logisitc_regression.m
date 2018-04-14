@@ -44,3 +44,6 @@ plot2DLinear(learnerB, XB, YB);
 %% Calculate error rate
 errorRateA = err(learnerA, XA, YA)
 errorRateB = err(learnerB, XB, YB)
+
+%% 
+
