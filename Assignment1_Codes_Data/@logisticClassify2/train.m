@@ -52,7 +52,12 @@ function obj = train(obj, X, Y, varargin)
 iter=1; Jsur=zeros(1,stopIter); J01=zeros(1,stopIter); done=0; 
 while (~done) 
   step = stepsize/iter;               % update step-size and evaluate current loss values
-  Jsur(iter) = 1/n*sum(-Y*log(1+exp(-obj.wts*X)));   %%% TODO: compute surrogate (neg log likelihood) loss
+  Jsur(iter) = 1/n*sum((-X(:,2)'*log((1+exp(-obj.wts.*X(:,1))).^-1))...
+      - ((1-X(:,2))'*log(1-((1+(exp(-obj.wts.*X(:,1)))).^-1)))... 
+      + (stepsize*sum(obj.wts.^2))...
+      );   %compute surrogate (neg log likelihood) loss
+
+      
   J01(iter) = err(obj,X,Yin);
 
   if (plotFlag), switch d,            % Plots to help with visualization
@@ -62,15 +67,15 @@ while (~done)
   end; end;
   fig(1); semilogx(1:iter, Jsur(1:iter),'b-',1:iter,J01(1:iter),'g-'); drawnow;
 
-  for j=1:n,
+  for j=1:n
     % Compute linear responses and activation for data point j
-    linResponse = obj.wts * X(j,1);
     
-
+    
     % Compute gradient:
-    grad = ((((obj.wts * Y(j))' * exp(linResponse)) + (X(j)*(1-Y(j))))./exp(linResponse)+1) + sum(2*obj.wts)
-
-    obj.wts = obj.wts - step * grad;      % take a step down the gradient
+    grad = (((obj.wts .* X(j,2) .* exp(obj.wts.*X(j,1))) + (X(j,1) * (1 - X(j,2))))... 
+        ./ ((exp(obj.wts.*X(j,1))) + 1)) + (stepsize * sum(2*obj.wts));
+    
+    obj.wts = obj.wts - step * grad;% take a step down the gradient
   end;
 
   done = false;

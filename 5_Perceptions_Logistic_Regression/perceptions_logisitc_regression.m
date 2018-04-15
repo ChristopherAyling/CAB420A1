@@ -45,5 +45,5 @@ plot2DLinear(learnerB, XB, YB);
 errorRateA = err(learnerA, XA, YA)
 errorRateB = err(learnerB, XB, YB)
 
-%% 
-
+%% testing train.m
+train(learnerA, XA, YA)
