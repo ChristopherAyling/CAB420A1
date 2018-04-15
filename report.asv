@@ -38,9 +38,7 @@
 %
 % $$ H_L(w) = [\frac{\partial^2 L}{\partial^2 \textbf{w}_j}, \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j}; \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k}, \frac{\partial^2 L}{\partial^2 \textbf{w}_k}] $$
 %
-% When k == j;
-%
-% $$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k} = \frac{\partial^2 L}{\partial^2 \textbf{w}_k} $$
+% When k == j
 %
 % $$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial \textbf{w}_j} 2 \lambda \textbf{w}_j - \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$
 %
