@@ -13,7 +13,7 @@
 % 
 
 %%
-% (a) Find the partial derivatives $\frac{\partial L}{\partial w_j}$
+% *(a) Find the partial derivatives $\frac{\partial L}{\partial w_j}$*
 %
 % $$ u = 1 + e^{y_i \left( \textbf{w}^T \textbf{x} + b \right)} $$
 %
@@ -32,7 +32,7 @@
 
 
 %%
-% (b) Find the partial second derivatives $\frac{\partial L^2}{\partial w_j \partial w_k}$
+% *(b) Find the partial second derivatives $\frac{\partial L^2}{\partial w_j \partial w_k}$*
 %
 % Hessian Matrix of $L(w)$
 %
@@ -79,12 +79,12 @@
 
 
 %%
-% (c) From these results, show that $L(w)$ is a convex function.
+% *(c) From these results, show that $L(w)$ is a convex function.*
 
 %% 1. Feature, Classes and Linear Regression
 
 %%
-% (a) Plot the training data in a scatter plot.
+% *(a) Plot the training data in a scatter plot.*
 %Clean up
 clc
 clear
@@ -97,17 +97,21 @@ xtr = mTrain(:,2);
 plot(xtr, ytr, 'bo');
 hold on;
 legend('Training data');
+xlabel('Time');
+ylabel('Acceleration');
 %%
-% (b) Create a linear predictor (slope and intercept) using the above
-% functions. Plot it on the same plot as the training data.
+% *(b) Create a linear predictor (slope and intercept) using the above
+% functions. Plot it on the same plot as the training data.*
 linXtr = polyx(xtr, 1);
 linLearner = linearReg(linXtr, ytr);
 xline = [0:.01:2]';
 yline = predict(linLearner, polyx(xline, 1));
 plot(xline, yline);
 legend('Training data', 'Linear predictor');
+xlabel('Time');
+ylabel('Acceleration');
 %%
-% (c) Create another plot with the data and a fifth-degree polynomial
+% *(c) Create another plot with the data and a fifth-degree polynomial*
 figure;
 plot(xtr, ytr, 'bo');
 hold on;
@@ -117,15 +121,17 @@ xline = [0:.01:2]';
 yline = predict(fifthLearner, polyx(xline, 5));
 plot(xline, yline);
 legend('Training data', 'Fifth degree polynomial');
+xlabel('Time');
+ylabel('Acceleration');
 axis([0 2 -150 100]);
 %%
-% (d) Calculate the mean squared error associated with each of your learned
-% models on the training data.
+% *(d) Calculate the mean squared error associated with each of your learned
+% models on the training data.*
 training_MSE_of_linear_predictor = mse(linLearner, linXtr, ytr)
 training_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifthXtr, ytr)
 
 %%
-% (e) Calculate the MSE for each model on the test data (in mcycleTest.txt).
+% *(e) Calculate the MSE for each model on the test data (in mcycleTest.txt).*
 mTest = load('data/mcycleTest.txt');
 ytst = mTest(:,1);
 xtst = mTest(:,2);
@@ -157,8 +163,8 @@ legend('Training data');
 hold off
 
 %%
-% (a) Using the knnRegress class, implement (add code to) the predict
-% function to make it functional.
+% *(a) Using the knnRegress class, implement (add code to) the predict
+% function to make it functional.*
 %
 % <include>@knnRegress/predict.m</include>
 learner = knnRegress(1,Xtrain, Ytrain);
@@ -174,11 +180,11 @@ ylabel('Acceleration');
 hold off
 
 %%
-% (b) Using the same technique as in Problem 1a, plot the predicted
+% *(b) Using the same technique as in Problem 1a, plot the predicted
 % function for several values of $k: 1, 2, 3, 5, 10, 50$. How does the
-% choice of $k$ relate to the “complexity” of the regression function?
+% choice of $k$ relate to the “complexity” of the regression function?*
 %
-% ANS: The higher the value of K, the lower the complexity.
+% _The higher the value of K, the lower the complexity._
 %
 ks = [1, 2, 3, 4, 5, 10, 50];
 Xs = min(Xtrain):0.001:max(Xtrain); Xs = Xs';
@@ -194,20 +200,20 @@ legend(cellstr(int2str(ks')))
 hold off
 
 %%
-% (c) What kind of functions can be output by a nearest neighbor regression
-% function? Briefly justify your conclusion.
+% *(c) What kind of functions can be output by a nearest neighbor regression
+% function? Briefly justify your conclusion.*
 %
-% As a KNN regression produces a piecewise linear function, given the right data, any function
-% can be approximated.
+% _As a KNN regression produces a piecewise linear function, given the right data, any function
+% can be approximated._
 %
 
 %% 3. Hold-out and Cross-validation
 
 %%
-% (a) Similarly to Problem 1 and 2, compute the MSE of the test data on a
+% *(a) Similarly to Problem 1 and 2, compute the MSE of the test data on a
 % model trained on only the first 20 training data examples for
 % $k = 1, 2, 3, . . . , 100$. Plot the MSE versus $k$ on a log-log scale
-% (see help loglog).
+% (see help loglog).*
 %Clean up
 clc
 clear
@@ -235,8 +241,8 @@ title('MSE on different K values');
 legend('Only using first 20 training data examples');
 hold on;
 %%
-% (b) Repeat, but use all the training data. What happened? Contrast with
-% your results from problem 1 (hint: which direction is “complexity” in this picture?).
+% *(b) Repeat, but use all the training data. What happened? Contrast with
+% your results from problem 1 (hint: which direction is “complexity” in this picture?).*
 ytr = mTrain(:,1); % all training data examples
 xtr = mTrain(:,2);
 MSE2 = zeros(100, 1); % initalise a vector for MSE of each k value
@@ -252,12 +258,12 @@ legend('Only using first 20 training data examples', ...
     'All training data examples');
 
 %%
-% (c) Using only the training data, estimate the curve using 4-fold
+% *(c) Using only the training data, estimate the curve using 4-fold
 % cross-validation. Split the training data into two parts, indices 1:20
 % and 21:80; use the larger of the two as training data and the smaller as
 % testing data, then repeat three more times with different sets of 20 and
 % average the MSE. Add this curve to your plot. Why might we need to use
-% this technique?
+% this technique?*
 MSE3 = zeros(100, 1); % initalise a vector for MSE of each k value
 for k=1:100 % test for 100 values of k
     MSEtemp = zeros(4, 1); % temp mse array for each i (averaged for each k)
@@ -287,8 +293,8 @@ X = iris(pi, 1:2);
 m = length(Y);
 
 %%
-% (a) Plot the data by their feature values, using the class value to
-% select the color.
+% *(a) Plot the data by their feature values, using the class value to
+% select the color.*
 figure('name', 'Iris Flowers')
 title('Iris Flowers')
 xlabel('Sepal Length')
@@ -300,8 +306,8 @@ plot(X(Y==2,1), X(Y==2,2), 'ko', 'markersize',7, 'markerfacecolor', 'blue');
 hold off
 
 %%
-% (b) Use the provided knnClassify class to learn a 1-nearest-neighbor
-% predictor.
+% *(b) Use the provided knnClassify class to learn a 1-nearest-neighbor
+% predictor.*
 k = 1
 nnlearner = knnClassify(k, X, Y);
 class2DPlot(nnlearner, X, Y);
@@ -310,8 +316,8 @@ xlabel('Sepal Length');
 ylabel('Sepal Width ');
 
 %%
-% (c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and
-% comment on their appearance.
+% *(c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and
+% comment on their appearance.*
 ks = [1, 3, 10, 30];
 for i=1:length(ks)
     learner = knnClassify(ks(i), X, Y);
@@ -322,12 +328,12 @@ for i=1:length(ks)
 end
 
 %%
-% (d) Now split the data into an 80/20 training/validation split. For
+% *(d) Now split the data into an 80/20 training/validation split. For
 % $k = [1, 2, 5, 10, 50, 100, 200]$, learn a model on the 80% and calculate
 % its performance (# of data classified incorrectly) on the validation
 % data. What value of k appears to generalize best given your training
 % data? Comment on the performance at the two endpoints, in terms of over-
-% or under-fitting.
+% or under-fitting.*
 
 split = 0.8; train_size = floor(split*m);
 
@@ -355,9 +361,9 @@ hold off
 %% 5. Perceptron and Logistic Regression
 
 %%
-% (a) Show the two classes in a scatter plot and verify that one is
+% *(a) Show the two classes in a scatter plot and verify that one is
 % linearly separable while the other is not
-% Clean up
+% Clean up*
 clear;
 clc;
 close all;
@@ -370,46 +376,46 @@ X = rescale(X);
 XA = X(Y<2,:); YA=Y(Y<2); % split into classes 0 and 1
 XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
 %%
-% (b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
+% *(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
 % it plots the two classes of data in dierent colors, along with the
 % decision boundary (a line). Include the listing of your code in your
 % report. To demo your function plot the decision boundary corresponding
-% to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$
+% to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$*
 
 %%
-% (c) Complete the predict.m function to make predictions for your linear classifier.
+% *(c) Complete the predict.m function to make predictions for your linear classifier.*
 
 %%
-% (d)
+% *(d)*
 % 
 % $$ \sigma\left( 1 + exp(-z) \right)^{-1} $$
 %
 % $$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$
 % 
-% Derive the gradient of the regularized negative log likelihood $J_j$ for
-% logistic regression, and give it in your report
+% *Derive the gradient of the regularized negative log likelihood $J_j$ for
+% logistic regression, and give it in your report*
 
 %%
-% (e) Complete your train.m function to perform stochastic gradient descent
-% on the logistic loss function. 
+% *(e) Complete your train.m function to perform stochastic gradient descent
+% on the logistic loss function.* 
 
 %%
-% (1) computing the surrogate loss function at each iteratio
+% *(1) computing the surrogate loss function at each iteration*
 %%
-% (2) computing the prediction and gradient associated with each data poin
+% *(2) computing the prediction and gradient associated with each data point*
 %%
-% (3) a gradient step on the parameters $\theta$
+% *(3) a gradient step on the parameters $\theta$*
 %%
-% (4) a stopping criterion.
+% *(4) a stopping criterion.*
 
 %%
-% (f) Run your logistic regression classifier on both data sets (A and B);
+% *(f) Run your logistic regression classifier on both data sets (A and B);
 % for this problem, use no regularization $(\alpha = 0)$. Describe your parameter
 % choices (stepsize, etc.) and show a plot of both the convergence of the
 % surrogate loss and error rate, and a plot of the final converged
 % classifier with the data (using e.g. plotClassify2D). In your report,
 % please also include the functions that you wrote (at minimum, train.m,
-% but possibly a few small helper functions as well)
+% but possibly a few small helper functions as well)*
 
 %%
 close all

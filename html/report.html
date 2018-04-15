@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>2018 - CAB420 - Machine Learning</h1><!--introduction--><p>Group Assignment 1 Alex Wilson and Christopher Ayling</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Theory</a></li><li><a href="#6">1. Feature, Classes and Linear Regression</a></li><li><a href="#12">2. kNN Regression</a></li><li><a href="#16">3. Hold-out and Cross-validation</a></li><li><a href="#20">4. Nearest Neighbor Classifiers</a></li><li><a href="#25">5. Perceptron and Logistic Regression</a></li></ul></div><h2 id="1">Theory</h2><p>Logistic regression is a method of fitting a probabilistic classifier that gives soft linear thresh-olds. It is common to use logistic regression with an objective function consisting of the negative log probability of the data plus an L2 regularizer:</p><p><img src="report_eq14160392775865838287.png" alt="$$L(\textbf{w}) = -\displaystyle\sum_{i=1}^{N} Log \left( \frac{1}{1+e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right) }} \right) + \lambda \|\textbf{w}\|_2^2 $$"></p><p>(a) Find the partial derivatives <img src="report_eq16132735743225087710.png" alt="$\frac{\partial L}{\partial w_j}$"></p><p><img src="report_eq12257533174260487838.png" alt="$$ u = 1 + e^{y_i \left( \textbf{w}^T \textbf{x} + b \right)} $$"></p><p><img src="report_eq10090302777239010647.png" alt="$$ L(\textbf{w}) = -\displaystyle\sum_{i=1}^{N} -log(u) + \lambda \|\textbf{w}\|_2^2 $$"></p><p><img src="report_eq08252005630636548557.png" alt="$$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial u} - log(u) \frac{\partial u}{\partial \textbf{w}_j} +  \frac{\partial}{\partial \textbf{w}_j} \lambda \|\textbf{w}\|_2^2 $$"></p><p><img src="report_eq07325477390628538046.png" alt="$$ \frac{\partial}{\partial w_j} \lambda \|\textbf{w}\|_2^2 = 2 \lambda \textbf{w}_j $$"></p><p><img src="report_eq06814341508522935216.png" alt="$$ \frac{\partial}{\partial u} -log(u) = \frac{-1}{u} $$"></p><p><img src="report_eq04243777201698649012.png" alt="$$ \frac{\partial u }{\partial \textbf{w}_j} = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq11323941061442235714.png" alt="$$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} 2 \lambda \textbf{w}_j - \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T _i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p>(b) Find the partial second derivatives <img src="report_eq15374450833825672506.png" alt="$\frac{\partial L^2}{\partial w_j \partial w_k}$"></p><p>Hessian Matrix of <img src="report_eq16462138314889442873.png" alt="$L(w)$"></p><p><img src="report_eq08483978398053945959.png" alt="$$ H_L(w) = [\frac{\partial^2 L}{\partial^2 \textbf{w}_j}, \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j}; \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k}, \frac{\partial^2 L}{\partial^2 \textbf{w}_k}] $$"></p><p>When k == j;</p><p><img src="report_eq15873774263093614811.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k} = \frac{\partial^2 L}{\partial^2 \textbf{w}_k} $$"></p><p><img src="report_eq18249924736580937491.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial \textbf{w}_j} 2 \lambda \textbf{w}_j - \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p><img src="report_eq11677744034651322881.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} 2 \lambda \textbf{w}_j = 2 \lambda $$"></p><p><img src="report_eq18121030632505689258.png" alt="$$ g = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq15918674576109237369.png" alt="$$ h = 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} $$"></p><p><img src="report_eq13157533742446903162.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{\frac{\partial g}{\partial \textbf{w}_j} h - g \frac{\partial h}{\partial \textbf{w}_j}}{h^2} $$"></p><p><img src="report_eq00653993747106987935.png" alt="$$ \frac{\partial g}{\partial \textbf{w}_j} = y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq07409330423886424867.png" alt="$$ \frac{\partial h}{\partial \textbf{w}_j} = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq05725671492111824230.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{ y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} + y^2_i \textbf{x}^2_i e^{2y_i(\textbf{w}^T \textbf{x}_i + b)} - y^2_i \textbf{x}^2_i e^{2y_i(\textbf{w}^T \textbf{x}_i + b)} }{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq14115763003425760821.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq05102907057196608629.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} 2 \lambda - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq03761171878176673023.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_k} = -\displaystyle\sum_{i=1}^{N} 2 \lambda - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p>When j ~= k</p><p><img src="report_eq03634564997740139667.png" alt="$$ \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial \textbf{w}_k} 2 \lambda \textbf{w}_j - \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p><img src="report_eq04853721358698632137.png" alt="$$ \frac{\partial}{\partial \textbf{w}_k} 2 \lambda \textbf{w}_j = 0 $$"></p><p><img src="report_eq00724677013308523612.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} = \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq02755654005349414648.png" alt="$$ \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p>(c) From these results, show that <img src="report_eq16462138314889442873.png" alt="$L(w)$"> is a convex function.</p><h2 id="6">1. Feature, Classes and Linear Regression</h2><p>(a) Plot the training data in a scatter plot.</p><pre class="codeinput"><span class="comment">%Clean up</span>
+  </style></head><body><div class="content"><h1>2018 - CAB420 - Machine Learning</h1><!--introduction--><p>Group Assignment 1 Alex Wilson and Christopher Ayling</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Theory</a></li><li><a href="#6">1. Feature, Classes and Linear Regression</a></li><li><a href="#12">2. kNN Regression</a></li><li><a href="#16">3. Hold-out and Cross-validation</a></li><li><a href="#20">4. Nearest Neighbor Classifiers</a></li><li><a href="#25">5. Perceptron and Logistic Regression</a></li></ul></div><h2 id="1">Theory</h2><p>Logistic regression is a method of fitting a probabilistic classifier that gives soft linear thresh-olds. It is common to use logistic regression with an objective function consisting of the negative log probability of the data plus an L2 regularizer:</p><p><img src="report_eq14160392775865838287.png" alt="$$L(\textbf{w}) = -\displaystyle\sum_{i=1}^{N} Log \left( \frac{1}{1+e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right) }} \right) + \lambda \|\textbf{w}\|_2^2 $$"></p><p><b>(a) Find the partial derivatives <img src="report_eq16132735743225087710.png" alt="$\frac{\partial L}{\partial w_j}$"></b></p><p><img src="report_eq12257533174260487838.png" alt="$$ u = 1 + e^{y_i \left( \textbf{w}^T \textbf{x} + b \right)} $$"></p><p><img src="report_eq10090302777239010647.png" alt="$$ L(\textbf{w}) = -\displaystyle\sum_{i=1}^{N} -log(u) + \lambda \|\textbf{w}\|_2^2 $$"></p><p><img src="report_eq08252005630636548557.png" alt="$$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial u} - log(u) \frac{\partial u}{\partial \textbf{w}_j} +  \frac{\partial}{\partial \textbf{w}_j} \lambda \|\textbf{w}\|_2^2 $$"></p><p><img src="report_eq07325477390628538046.png" alt="$$ \frac{\partial}{\partial w_j} \lambda \|\textbf{w}\|_2^2 = 2 \lambda \textbf{w}_j $$"></p><p><img src="report_eq06814341508522935216.png" alt="$$ \frac{\partial}{\partial u} -log(u) = \frac{-1}{u} $$"></p><p><img src="report_eq04243777201698649012.png" alt="$$ \frac{\partial u }{\partial \textbf{w}_j} = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq11323941061442235714.png" alt="$$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} 2 \lambda \textbf{w}_j - \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T _i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p><b>(b) Find the partial second derivatives <img src="report_eq15374450833825672506.png" alt="$\frac{\partial L^2}{\partial w_j \partial w_k}$"></b></p><p>Hessian Matrix of <img src="report_eq16462138314889442873.png" alt="$L(w)$"></p><p><img src="report_eq08483978398053945959.png" alt="$$ H_L(w) = [\frac{\partial^2 L}{\partial^2 \textbf{w}_j}, \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j}; \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k}, \frac{\partial^2 L}{\partial^2 \textbf{w}_k}] $$"></p><p>When k == j;</p><p><img src="report_eq15873774263093614811.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = \frac{\partial^2 L}{\partial \textbf{w}_j \partial \textbf{w}_k} = \frac{\partial^2 L}{\partial^2 \textbf{w}_k} $$"></p><p><img src="report_eq18249924736580937491.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial \textbf{w}_j} 2 \lambda \textbf{w}_j - \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p><img src="report_eq11677744034651322881.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} 2 \lambda \textbf{w}_j = 2 \lambda $$"></p><p><img src="report_eq18121030632505689258.png" alt="$$ g = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq15918674576109237369.png" alt="$$ h = 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} $$"></p><p><img src="report_eq13157533742446903162.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{\frac{\partial g}{\partial \textbf{w}_j} h - g \frac{\partial h}{\partial \textbf{w}_j}}{h^2} $$"></p><p><img src="report_eq00653993747106987935.png" alt="$$ \frac{\partial g}{\partial \textbf{w}_j} = y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq07409330423886424867.png" alt="$$ \frac{\partial h}{\partial \textbf{w}_j} = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$"></p><p><img src="report_eq05725671492111824230.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{ y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} + y^2_i \textbf{x}^2_i e^{2y_i(\textbf{w}^T \textbf{x}_i + b)} - y^2_i \textbf{x}^2_i e^{2y_i(\textbf{w}^T \textbf{x}_i + b)} }{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq14115763003425760821.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{g}{h} = \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq05102907057196608629.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} 2 \lambda - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq03761171878176673023.png" alt="$$ \frac{\partial^2 L}{\partial^2 \textbf{w}_k} = -\displaystyle\sum_{i=1}^{N} 2 \lambda - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p>When j ~= k</p><p><img src="report_eq03634564997740139667.png" alt="$$ \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial \textbf{w}_k} 2 \lambda \textbf{w}_j - \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$"></p><p><img src="report_eq04853721358698632137.png" alt="$$ \frac{\partial}{\partial \textbf{w}_k} 2 \lambda \textbf{w}_j = 0 $$"></p><p><img src="report_eq00724677013308523612.png" alt="$$ \frac{\partial}{\partial \textbf{w}_j} \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} = \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><img src="report_eq02755654005349414648.png" alt="$$ \frac{\partial^2 L}{\partial \textbf{w}_k \partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} - \frac{y^2_i \textbf{x}^2_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)}}{\left( 1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)} \right)^2} $$"></p><p><b>(c) From these results, show that <img src="report_eq16462138314889442873.png" alt="$L(w)$"> is a convex function.</b></p><h2 id="6">1. Feature, Classes and Linear Regression</h2><p><b>(a) Plot the training data in a scatter plot.</b></p><pre class="codeinput"><span class="comment">%Clean up</span>
 clc
 clear
 close <span class="string">all</span>
@@ -78,13 +78,17 @@ xtr = mTrain(:,2);
 plot(xtr, ytr, <span class="string">'bo'</span>);
 hold <span class="string">on</span>;
 legend(<span class="string">'Training data'</span>);
-</pre><img vspace="5" hspace="5" src="report_01.png" alt=""> <p>(b) Create a linear predictor (slope and intercept) using the above functions. Plot it on the same plot as the training data.</p><pre class="codeinput">linXtr = polyx(xtr, 1);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Acceleration'</span>);
+</pre><img vspace="5" hspace="5" src="report_01.png" alt=""> <p><b>(b) Create a linear predictor (slope and intercept) using the above functions. Plot it on the same plot as the training data.</b></p><pre class="codeinput">linXtr = polyx(xtr, 1);
 linLearner = linearReg(linXtr, ytr);
 xline = [0:.01:2]';
 yline = predict(linLearner, polyx(xline, 1));
 plot(xline, yline);
 legend(<span class="string">'Training data'</span>, <span class="string">'Linear predictor'</span>);
-</pre><img vspace="5" hspace="5" src="report_02.png" alt=""> <p>(c) Create another plot with the data and a fifth-degree polynomial</p><pre class="codeinput">figure;
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Acceleration'</span>);
+</pre><img vspace="5" hspace="5" src="report_02.png" alt=""> <p><b>(c) Create another plot with the data and a fifth-degree polynomial</b></p><pre class="codeinput">figure;
 plot(xtr, ytr, <span class="string">'bo'</span>);
 hold <span class="string">on</span>;
 fifthXtr = polyx(xtr, 5);
@@ -93,8 +97,10 @@ xline = [0:.01:2]';
 yline = predict(fifthLearner, polyx(xline, 5));
 plot(xline, yline);
 legend(<span class="string">'Training data'</span>, <span class="string">'Fifth degree polynomial'</span>);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Acceleration'</span>);
 axis([0 2 -150 100]);
-</pre><img vspace="5" hspace="5" src="report_03.png" alt=""> <p>(d) Calculate the mean squared error associated with each of your learned models on the training data.</p><pre class="codeinput">training_MSE_of_linear_predictor = mse(linLearner, linXtr, ytr)
+</pre><img vspace="5" hspace="5" src="report_03.png" alt=""> <p><b>(d) Calculate the mean squared error associated with each of your learned models on the training data.</b></p><pre class="codeinput">training_MSE_of_linear_predictor = mse(linLearner, linXtr, ytr)
 training_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifthXtr, ytr)
 </pre><pre class="codeoutput">
 training_MSE_of_linear_predictor =
@@ -106,7 +112,7 @@ training_MSE_of_fifth_degree_predictor =
 
    1.2546e+03
 
-</pre><p>(e) Calculate the MSE for each model on the test data (in mcycleTest.txt).</p><pre class="codeinput">mTest = load(<span class="string">'data/mcycleTest.txt'</span>);
+</pre><p><b>(e) Calculate the MSE for each model on the test data (in mcycleTest.txt).</b></p><pre class="codeinput">mTest = load(<span class="string">'data/mcycleTest.txt'</span>);
 ytst = mTest(:,1);
 xtst = mTest(:,2);
 linXtst = polyx(xtst, 1);
@@ -143,7 +149,7 @@ xlabel(<span class="string">'Time'</span>);
 ylabel(<span class="string">'Acceleration'</span>);
 legend(<span class="string">'Training data'</span>);
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="report_04.png" alt=""> <p>(a) Using the knnRegress class, implement (add code to) the predict function to make it functional.</p><pre class="language-matlab">
+</pre><img vspace="5" hspace="5" src="report_04.png" alt=""> <p><b>(a) Using the knnRegress class, implement (add code to) the predict function to make it functional.</b></p><pre class="language-matlab">
     <span class="comment">% Test function: predict on Xtest</span>
     <span class="keyword">function</span> Yte = predict(obj,Xte)
       [Ntr,Mtr] = size(obj.Xtrain);
@@ -175,7 +181,7 @@ title(<span class="string">'1NN on Motorcycle Testing Data'</span>);
 xlabel(<span class="string">'Time'</span>);
 ylabel(<span class="string">'Acceleration'</span>);
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="report_05.png" alt=""> <p>(b) Using the same technique as in Problem 1a, plot the predicted function for several values of <img src="report_eq17873549745137347869.png" alt="$k: 1, 2, 3, 5, 10, 50$">. How does the choice of <img src="report_eq15636846968047188835.png" alt="$k$"> relate to the &#8220;complexity&#8221; of the regression function?</p><p>ANS: The higher the value of K, the lower the complexity.</p><pre class="codeinput">ks = [1, 2, 3, 4, 5, 10, 50];
+</pre><img vspace="5" hspace="5" src="report_05.png" alt=""> <p><b>(b) Using the same technique as in Problem 1a, plot the predicted function for several values of <img src="report_eq17873549745137347869.png" alt="$k: 1, 2, 3, 5, 10, 50$">. How does the choice of <img src="report_eq15636846968047188835.png" alt="$k$"> relate to the &#8220;complexity&#8221; of the regression function?</b></p><p><i>The higher the value of K, the lower the complexity.</i></p><pre class="codeinput">ks = [1, 2, 3, 4, 5, 10, 50];
 Xs = min(Xtrain):0.001:max(Xtrain); Xs = Xs';
 figure(<span class="string">'name'</span>, <span class="string">'testing values of k'</span>)
 hold <span class="string">on</span>
@@ -187,7 +193,7 @@ learner = knnRegress(1,Xtrain, Ytrain);
 title(<span class="string">'kNN Regression Function for Motorcycle Data'</span>)
 legend(cellstr(int2str(ks')))
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="report_06.png" alt=""> <p>(c) What kind of functions can be output by a nearest neighbor regression function? Briefly justify your conclusion.</p><p>As a KNN regression produces a piecewise linear function, given the right data, any function can be approximated.</p><h2 id="16">3. Hold-out and Cross-validation</h2><p>(a) Similarly to Problem 1 and 2, compute the MSE of the test data on a model trained on only the first 20 training data examples for <img src="report_eq13389923201162732871.png" alt="$k = 1, 2, 3, . . . , 100$">. Plot the MSE versus <img src="report_eq15636846968047188835.png" alt="$k$"> on a log-log scale (see help loglog).</p><pre class="codeinput"><span class="comment">%Clean up</span>
+</pre><img vspace="5" hspace="5" src="report_06.png" alt=""> <p><b>(c) What kind of functions can be output by a nearest neighbor regression function? Briefly justify your conclusion.</b></p><p><i>As a KNN regression produces a piecewise linear function, given the right data, any function can be approximated.</i></p><h2 id="16">3. Hold-out and Cross-validation</h2><p><b>(a) Similarly to Problem 1 and 2, compute the MSE of the test data on a model trained on only the first 20 training data examples for <img src="report_eq13389923201162732871.png" alt="$k = 1, 2, 3, . . . , 100$">. Plot the MSE versus <img src="report_eq15636846968047188835.png" alt="$k$"> on a log-log scale (see help loglog).</b></p><pre class="codeinput"><span class="comment">%Clean up</span>
 clc
 clear
 close <span class="string">all</span>
@@ -208,8 +214,12 @@ MSE1 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each
 <span class="keyword">end</span>
 figure;
 loglog(1:100, MSE1, <span class="string">'r'</span>); <span class="comment">% plot on a loglog graph</span>
+xlabel(<span class="string">'K value'</span>);
+ylabel(<span class="string">'MSE'</span>);
+title(<span class="string">'MSE on different K values'</span>);
+legend(<span class="string">'Only using first 20 training data examples'</span>);
 hold <span class="string">on</span>;
-</pre><img vspace="5" hspace="5" src="report_07.png" alt=""> <p>(b) Repeat, but use all the training data. What happened? Contrast with your results from problem 1 (hint: which direction is &#8220;complexity&#8221; in this picture?).</p><pre class="codeinput">ytr = mTrain(:,1); <span class="comment">% all training data examples</span>
+</pre><img vspace="5" hspace="5" src="report_07.png" alt=""> <p><b>(b) Repeat, but use all the training data. What happened? Contrast with your results from problem 1 (hint: which direction is &#8220;complexity&#8221; in this picture?).</b></p><pre class="codeinput">ytr = mTrain(:,1); <span class="comment">% all training data examples</span>
 xtr = mTrain(:,2);
 MSE2 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each k value</span>
 
@@ -220,7 +230,9 @@ MSE2 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each
 <span class="keyword">end</span>
 
 loglog(1:100, MSE2, <span class="string">'b'</span>); <span class="comment">% plot on the loglog graph</span>
-</pre><img vspace="5" hspace="5" src="report_08.png" alt=""> <p>(c) Using only the training data, estimate the curve using 4-fold cross-validation. Split the training data into two parts, indices 1:20 and 21:80; use the larger of the two as training data and the smaller as testing data, then repeat three more times with different sets of 20 and average the MSE. Add this curve to your plot. Why might we need to use this technique?</p><pre class="codeinput">MSE3 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each k value</span>
+legend(<span class="string">'Only using first 20 training data examples'</span>, <span class="keyword">...</span>
+    <span class="string">'All training data examples'</span>);
+</pre><img vspace="5" hspace="5" src="report_08.png" alt=""> <p><b>(c) Using only the training data, estimate the curve using 4-fold cross-validation. Split the training data into two parts, indices 1:20 and 21:80; use the larger of the two as training data and the smaller as testing data, then repeat three more times with different sets of 20 and average the MSE. Add this curve to your plot. Why might we need to use this technique?</b></p><pre class="codeinput">MSE3 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each k value</span>
 <span class="keyword">for</span> k=1:100 <span class="comment">% test for 100 values of k</span>
     MSEtemp = zeros(4, 1); <span class="comment">% temp mse array for each i (averaged for each k)</span>
     <span class="keyword">for</span> i=1:4
@@ -234,13 +246,9 @@ loglog(1:100, MSE2, <span class="string">'b'</span>); <span class="comment">% pl
     MSE3(k) = mean(MSEtemp); <span class="comment">% average the MSE</span>
 <span class="keyword">end</span>
 loglog(1:100, MSE3, <span class="string">'m'</span>); <span class="comment">% plot on the loglog graph</span>
-<span class="comment">% Figure beautification</span>
-xlabel(<span class="string">'K value'</span>);
-ylabel(<span class="string">'MSE'</span>);
 legend(<span class="string">'Only using first 20 training data examples'</span>, <span class="keyword">...</span>
     <span class="string">'All training data examples'</span>, <span class="keyword">...</span>
     <span class="string">'All training data examples with 4-fold Cross-validation'</span>);
-title(<span class="string">'MSE on different K values'</span>);
 </pre><img vspace="5" hspace="5" src="report_09.png" alt=""> <h2 id="20">4. Nearest Neighbor Classifiers</h2><pre class="codeinput">clc
 clear
 <span class="comment">% Load Iris Dataset</span>
@@ -249,7 +257,7 @@ pi = randperm(size(iris, 1));
 Y = iris(pi, 5);
 X = iris(pi, 1:2);
 m = length(Y);
-</pre><p>(a) Plot the data by their feature values, using the class value to select the color.</p><pre class="codeinput">figure(<span class="string">'name'</span>, <span class="string">'Iris Flowers'</span>)
+</pre><p><b>(a) Plot the data by their feature values, using the class value to select the color.</b></p><pre class="codeinput">figure(<span class="string">'name'</span>, <span class="string">'Iris Flowers'</span>)
 title(<span class="string">'Iris Flowers'</span>)
 xlabel(<span class="string">'Sepal Length'</span>)
 ylabel(<span class="string">'Sepal Width'</span>)
@@ -258,7 +266,7 @@ plot(X(Y==0,1), X(Y==0,2), <span class="string">'ko'</span>, <span class="string
 plot(X(Y==1,1), X(Y==1,2), <span class="string">'ko'</span>, <span class="string">'markersize'</span>,7, <span class="string">'markerfacecolor'</span>, <span class="string">'green'</span>);
 plot(X(Y==2,1), X(Y==2,2), <span class="string">'ko'</span>, <span class="string">'markersize'</span>,7, <span class="string">'markerfacecolor'</span>, <span class="string">'blue'</span>);
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="report_10.png" alt=""> <p>(b) Use the provided knnClassify class to learn a 1-nearest-neighbor predictor.</p><pre class="codeinput">k = 1
+</pre><img vspace="5" hspace="5" src="report_10.png" alt=""> <p><b>(b) Use the provided knnClassify class to learn a 1-nearest-neighbor predictor.</b></p><pre class="codeinput">k = 1
 nnlearner = knnClassify(k, X, Y);
 class2DPlot(nnlearner, X, Y);
 title(string(k) + <span class="string">'NN Classifier'</span>);
@@ -269,7 +277,7 @@ k =
 
      1
 
-</pre><img vspace="5" hspace="5" src="report_11.png" alt=""> <p>(c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and comment on their appearance.</p><pre class="codeinput">ks = [1, 3, 10, 30];
+</pre><img vspace="5" hspace="5" src="report_11.png" alt=""> <p><b>(c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and comment on their appearance.</b></p><pre class="codeinput">ks = [1, 3, 10, 30];
 <span class="keyword">for</span> i=1:length(ks)
     learner = knnClassify(ks(i), X, Y);
     class2DPlot(learner, X, Y);
@@ -277,7 +285,7 @@ k =
     xlabel(<span class="string">'Sepal Length'</span>);
     ylabel(<span class="string">'Sepal Width '</span>);
 <span class="keyword">end</span>
-</pre><img vspace="5" hspace="5" src="report_12.png" alt=""> <img vspace="5" hspace="5" src="report_13.png" alt=""> <img vspace="5" hspace="5" src="report_14.png" alt=""> <img vspace="5" hspace="5" src="report_15.png" alt=""> <p>(d) Now split the data into an 80/20 training/validation split. For <img src="report_eq03434794804198128651.png" alt="$k = [1, 2, 5, 10, 50, 100, 200]$">, learn a model on the 80% and calculate its performance (# of data classified incorrectly) on the validation data. What value of k appears to generalize best given your training data? Comment on the performance at the two endpoints, in terms of over- or under-fitting.</p><pre class="codeinput">split = 0.8; train_size = floor(split*m);
+</pre><img vspace="5" hspace="5" src="report_12.png" alt=""> <img vspace="5" hspace="5" src="report_13.png" alt=""> <img vspace="5" hspace="5" src="report_14.png" alt=""> <img vspace="5" hspace="5" src="report_15.png" alt=""> <p><b>(d) Now split the data into an 80/20 training/validation split. For <img src="report_eq03434794804198128651.png" alt="$k = [1, 2, 5, 10, 50, 100, 200]$">, learn a model on the 80% and calculate its performance (# of data classified incorrectly) on the validation data. What value of k appears to generalize best given your training data? Comment on the performance at the two endpoints, in terms of over- or under-fitting.</b></p><pre class="codeinput">split = 0.8; train_size = floor(split*m);
 
 Xtrain = X(1:train_size,:);
 Ytrain = Y(1:train_size,:);
@@ -299,7 +307,18 @@ ylabel(<span class="string">'Errors'</span>);
 plot(errors);
 xticklabels(ks)
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="report_16.png" alt=""> <h2 id="25">5. Perceptron and Logistic Regression</h2><p>(a) Show the two classes in a scatter plot and verify that one is linearly separable while the other is not</p><p>(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that it plots the two classes of data in dierent colors, along with the decision boundary (a line). Include the listing of your code in your report. To demo your function plot the decision boundary corresponding to the classifier <img src="report_eq09323166714417258934.png" alt="$$ sign(.5 + 1x_1 - .25x_2) $$"></p><p>(c) Complete the predict.m function to make predictions for your linear classifier.</p><p>(d)</p><p><img src="report_eq05263605100582824169.png" alt="$$ \sigma\left( 1 + exp(-z) \right)^{-1} $$"></p><p><img src="report_eq07692817195444262305.png" alt="$$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$"></p><p>Derive the gradient of the regularized negative log likelihood <img src="report_eq12875208084026382776.png" alt="$J_j$"> for logistic regression, and give it in your report</p><p>(e) Complete your train.m function to perform stochastic gradient descent on the logistic loss function.</p><p>(1) computing the surrogate loss function at each iteratio</p><p>(2) computing the prediction and gradient associated with each data poin</p><p>(3) a gradient step on the parameters <img src="report_eq08288499342375314727.png" alt="$\theta$"></p><p>(4) a stopping criterion.</p><p>(f) Run your logistic regression classifier on both data sets (A and B); for this problem, use no regularization <img src="report_eq06806086399984933598.png" alt="$(\alpha = 0)$">. Describe your parameter choices (stepsize, etc.) and show a plot of both the convergence of the surrogate loss and error rate, and a plot of the final converged classifier with the data (using e.g. plotClassify2D). In your report, please also include the functions that you wrote (at minimum, train.m, but possibly a few small helper functions as well)</p><pre class="codeinput">close <span class="string">all</span>
+</pre><img vspace="5" hspace="5" src="report_16.png" alt=""> <h2 id="25">5. Perceptron and Logistic Regression</h2><p><b>(a) Show the two classes in a scatter plot and verify that one is linearly separable while the other is not Clean up</b></p><pre class="codeinput">clear;
+clc;
+close <span class="string">all</span>;
+<span class="comment">% Import</span>
+iris = load(<span class="string">'data/iris.txt'</span>);
+X = iris(:,1:2); Y = iris(:,end); <span class="comment">% use the first two features and classifier</span>
+<span class="comment">% Reformat data</span>
+[X, Y] = shuffleData(X,Y); <span class="comment">% shuffle the data</span>
+X = rescale(X);
+XA = X(Y&lt;2,:); YA=Y(Y&lt;2); <span class="comment">% split into classes 0 and 1</span>
+XB = X(Y&gt;0,:); YB=Y(Y&gt;0); <span class="comment">% and 1 and 2</span>
+</pre><p><b>(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that it plots the two classes of data in dierent colors, along with the decision boundary (a line). Include the listing of your code in your report. To demo your function plot the decision boundary corresponding to the classifier <img src="report_eq09323166714417258934.png" alt="$$ sign(.5 + 1x_1 - .25x_2) $$"></b></p><p><b>(c) Complete the predict.m function to make predictions for your linear classifier.</b></p><p><b>(d)</b></p><p><img src="report_eq05263605100582824169.png" alt="$$ \sigma\left( 1 + exp(-z) \right)^{-1} $$"></p><p><img src="report_eq07692817195444262305.png" alt="$$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$"></p><p><b>Derive the gradient of the regularized negative log likelihood <img src="report_eq12875208084026382776.png" alt="$J_j$"> for logistic regression, and give it in your report</b></p><p><b>(e) Complete your train.m function to perform stochastic gradient descent on the logistic loss function.</b></p><p><b>(1) computing the surrogate loss function at each iteration</b></p><p><b>(2) computing the prediction and gradient associated with each data point</b></p><p><b>(3) a gradient step on the parameters <img src="report_eq08288499342375314727.png" alt="$\theta$"></b></p><p><b>(4) a stopping criterion.</b></p><p><b>(f) Run your logistic regression classifier on both data sets (A and B); for this problem, use no regularization <img src="report_eq06806086399984933598.png" alt="$(\alpha = 0)$">. Describe your parameter choices (stepsize, etc.) and show a plot of both the convergence of the surrogate loss and error rate, and a plot of the final converged classifier with the data (using e.g. plotClassify2D). In your report, please also include the functions that you wrote (at minimum, train.m, but possibly a few small helper functions as well)</b></p><pre class="codeinput">close <span class="string">all</span>
 </pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% 2018 - CAB420 - Machine Learning
@@ -317,7 +336,7 @@ hold <span class="string">off</span>
 % 
 
 %%
-% (a) Find the partial derivatives $\frac{\partial L}{\partial w_j}$
+% *(a) Find the partial derivatives $\frac{\partial L}{\partial w_j}$*
 %
 % $$ u = 1 + e^{y_i \left( \textbf{w}^T \textbf{x} + b \right)} $$
 %
@@ -336,7 +355,7 @@ hold <span class="string">off</span>
 
 
 %%
-% (b) Find the partial second derivatives $\frac{\partial L^2}{\partial w_j \partial w_k}$
+% *(b) Find the partial second derivatives $\frac{\partial L^2}{\partial w_j \partial w_k}$*
 %
 % Hessian Matrix of $L(w)$
 %
@@ -383,12 +402,12 @@ hold <span class="string">off</span>
 
 
 %%
-% (c) From these results, show that $L(w)$ is a convex function.
+% *(c) From these results, show that $L(w)$ is a convex function.*
 
 %% 1. Feature, Classes and Linear Regression
 
 %%
-% (a) Plot the training data in a scatter plot.
+% *(a) Plot the training data in a scatter plot.*
 %Clean up
 clc
 clear
@@ -401,17 +420,21 @@ xtr = mTrain(:,2);
 plot(xtr, ytr, 'bo');
 hold on;
 legend('Training data');
+xlabel('Time');
+ylabel('Acceleration');
 %%
-% (b) Create a linear predictor (slope and intercept) using the above
-% functions. Plot it on the same plot as the training data.
+% *(b) Create a linear predictor (slope and intercept) using the above
+% functions. Plot it on the same plot as the training data.*
 linXtr = polyx(xtr, 1);
 linLearner = linearReg(linXtr, ytr);
 xline = [0:.01:2]';
 yline = predict(linLearner, polyx(xline, 1));
 plot(xline, yline);
 legend('Training data', 'Linear predictor');
+xlabel('Time');
+ylabel('Acceleration');
 %%
-% (c) Create another plot with the data and a fifth-degree polynomial
+% *(c) Create another plot with the data and a fifth-degree polynomial*
 figure;
 plot(xtr, ytr, 'bo');
 hold on;
@@ -421,15 +444,17 @@ xline = [0:.01:2]';
 yline = predict(fifthLearner, polyx(xline, 5));
 plot(xline, yline);
 legend('Training data', 'Fifth degree polynomial');
+xlabel('Time');
+ylabel('Acceleration');
 axis([0 2 -150 100]);
 %%
-% (d) Calculate the mean squared error associated with each of your learned
-% models on the training data.
+% *(d) Calculate the mean squared error associated with each of your learned
+% models on the training data.*
 training_MSE_of_linear_predictor = mse(linLearner, linXtr, ytr)
 training_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifthXtr, ytr)
 
 %%
-% (e) Calculate the MSE for each model on the test data (in mcycleTest.txt).
+% *(e) Calculate the MSE for each model on the test data (in mcycleTest.txt).*
 mTest = load('data/mcycleTest.txt');
 ytst = mTest(:,1);
 xtst = mTest(:,2);
@@ -461,8 +486,8 @@ legend('Training data');
 hold off
 
 %%
-% (a) Using the knnRegress class, implement (add code to) the predict
-% function to make it functional.
+% *(a) Using the knnRegress class, implement (add code to) the predict
+% function to make it functional.*
 %
 % <include>@knnRegress/predict.m</include>
 learner = knnRegress(1,Xtrain, Ytrain);
@@ -478,11 +503,11 @@ ylabel('Acceleration');
 hold off
 
 %%
-% (b) Using the same technique as in Problem 1a, plot the predicted
+% *(b) Using the same technique as in Problem 1a, plot the predicted
 % function for several values of $k: 1, 2, 3, 5, 10, 50$. How does the
-% choice of $k$ relate to the “complexity” of the regression function?
+% choice of $k$ relate to the “complexity” of the regression function?*
 %
-% ANS: The higher the value of K, the lower the complexity.
+% _The higher the value of K, the lower the complexity._
 %
 ks = [1, 2, 3, 4, 5, 10, 50];
 Xs = min(Xtrain):0.001:max(Xtrain); Xs = Xs';
@@ -498,20 +523,20 @@ legend(cellstr(int2str(ks')))
 hold off
 
 %%
-% (c) What kind of functions can be output by a nearest neighbor regression
-% function? Briefly justify your conclusion.
+% *(c) What kind of functions can be output by a nearest neighbor regression
+% function? Briefly justify your conclusion.*
 %
-% As a KNN regression produces a piecewise linear function, given the right data, any function
-% can be approximated.
+% _As a KNN regression produces a piecewise linear function, given the right data, any function
+% can be approximated._
 %
 
 %% 3. Hold-out and Cross-validation
 
 %%
-% (a) Similarly to Problem 1 and 2, compute the MSE of the test data on a
+% *(a) Similarly to Problem 1 and 2, compute the MSE of the test data on a
 % model trained on only the first 20 training data examples for
 % $k = 1, 2, 3, . . . , 100$. Plot the MSE versus $k$ on a log-log scale
-% (see help loglog).
+% (see help loglog).*
 %Clean up
 clc
 clear
@@ -533,10 +558,14 @@ for k=1:100 % iterate on each k value
 end 
 figure;
 loglog(1:100, MSE1, 'r'); % plot on a loglog graph
+xlabel('K value');
+ylabel('MSE');
+title('MSE on different K values');
+legend('Only using first 20 training data examples');
 hold on;
 %%
-% (b) Repeat, but use all the training data. What happened? Contrast with
-% your results from problem 1 (hint: which direction is “complexity” in this picture?).
+% *(b) Repeat, but use all the training data. What happened? Contrast with
+% your results from problem 1 (hint: which direction is “complexity” in this picture?).*
 ytr = mTrain(:,1); % all training data examples
 xtr = mTrain(:,2);
 MSE2 = zeros(100, 1); % initalise a vector for MSE of each k value
@@ -548,14 +577,16 @@ for k=1:100 % iterate on each k value
 end 
 
 loglog(1:100, MSE2, 'b'); % plot on the loglog graph
+legend('Only using first 20 training data examples', ...
+    'All training data examples');
 
 %%
-% (c) Using only the training data, estimate the curve using 4-fold
+% *(c) Using only the training data, estimate the curve using 4-fold
 % cross-validation. Split the training data into two parts, indices 1:20
 % and 21:80; use the larger of the two as training data and the smaller as
 % testing data, then repeat three more times with different sets of 20 and
 % average the MSE. Add this curve to your plot. Why might we need to use
-% this technique?
+% this technique?*
 MSE3 = zeros(100, 1); % initalise a vector for MSE of each k value
 for k=1:100 % test for 100 values of k
     MSEtemp = zeros(4, 1); % temp mse array for each i (averaged for each k)
@@ -570,13 +601,10 @@ for k=1:100 % test for 100 values of k
     MSE3(k) = mean(MSEtemp); % average the MSE 
 end
 loglog(1:100, MSE3, 'm'); % plot on the loglog graph
-% Figure beautification
-xlabel('K value');
-ylabel('MSE');
 legend('Only using first 20 training data examples', ...
     'All training data examples', ...
     'All training data examples with 4-fold Cross-validation');
-title('MSE on different K values');
+
 %% 4. Nearest Neighbor Classifiers
 clc
 clear
@@ -588,8 +616,8 @@ X = iris(pi, 1:2);
 m = length(Y);
 
 %%
-% (a) Plot the data by their feature values, using the class value to
-% select the color.
+% *(a) Plot the data by their feature values, using the class value to
+% select the color.*
 figure('name', 'Iris Flowers')
 title('Iris Flowers')
 xlabel('Sepal Length')
@@ -601,8 +629,8 @@ plot(X(Y==2,1), X(Y==2,2), 'ko', 'markersize',7, 'markerfacecolor', 'blue');
 hold off
 
 %%
-% (b) Use the provided knnClassify class to learn a 1-nearest-neighbor
-% predictor.
+% *(b) Use the provided knnClassify class to learn a 1-nearest-neighbor
+% predictor.*
 k = 1
 nnlearner = knnClassify(k, X, Y);
 class2DPlot(nnlearner, X, Y);
@@ -611,8 +639,8 @@ xlabel('Sepal Length');
 ylabel('Sepal Width ');
 
 %%
-% (c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and
-% comment on their appearance.
+% *(c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and
+% comment on their appearance.*
 ks = [1, 3, 10, 30];
 for i=1:length(ks)
     learner = knnClassify(ks(i), X, Y);
@@ -623,12 +651,12 @@ for i=1:length(ks)
 end
 
 %%
-% (d) Now split the data into an 80/20 training/validation split. For
+% *(d) Now split the data into an 80/20 training/validation split. For
 % $k = [1, 2, 5, 10, 50, 100, 200]$, learn a model on the 80% and calculate
 % its performance (# of data classified incorrectly) on the validation
 % data. What value of k appears to generalize best given your training
 % data? Comment on the performance at the two endpoints, in terms of over-
-% or under-fitting.
+% or under-fitting.*
 
 split = 0.8; train_size = floor(split*m);
 
@@ -656,50 +684,61 @@ hold off
 %% 5. Perceptron and Logistic Regression
 
 %%
-% (a) Show the two classes in a scatter plot and verify that one is
+% *(a) Show the two classes in a scatter plot and verify that one is
 % linearly separable while the other is not
-
+% Clean up*
+clear;
+clc;
+close all;
+% Import 
+iris = load('data/iris.txt');
+X = iris(:,1:2); Y = iris(:,end); % use the first two features and classifier
+% Reformat data
+[X, Y] = shuffleData(X,Y); % shuffle the data 
+X = rescale(X);
+XA = X(Y<2,:); YA=Y(Y<2); % split into classes 0 and 1
+XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
 %%
-% (b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
+% *(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
 % it plots the two classes of data in dierent colors, along with the
 % decision boundary (a line). Include the listing of your code in your
 % report. To demo your function plot the decision boundary corresponding
-% to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$
+% to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$*
 
 %%
-% (c) Complete the predict.m function to make predictions for your linear classifier.
+% *(c) Complete the predict.m function to make predictions for your linear classifier.*
 
 %%
-% (d)
+% *(d)*
 % 
 % $$ \sigma\left( 1 + exp(-z) \right)^{-1} $$
 %
 % $$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$
 % 
-% Derive the gradient of the regularized negative log likelihood $J_j$ for
-% logistic regression, and give it in your report
+% *Derive the gradient of the regularized negative log likelihood $J_j$ for
+% logistic regression, and give it in your report*
 
 %%
-% (e) Complete your train.m function to perform stochastic gradient descent
-% on the logistic loss function. 
+% *(e) Complete your train.m function to perform stochastic gradient descent
+% on the logistic loss function.* 
 
 %%
-% (1) computing the surrogate loss function at each iteratio
+% *(1) computing the surrogate loss function at each iteration*
 %%
-% (2) computing the prediction and gradient associated with each data poin
+% *(2) computing the prediction and gradient associated with each data point*
 %%
-% (3) a gradient step on the parameters $\theta$
+% *(3) a gradient step on the parameters $\theta$*
 %%
-% (4) a stopping criterion.
+% *(4) a stopping criterion.*
 
 %%
-% (f) Run your logistic regression classifier on both data sets (A and B);
+% *(f) Run your logistic regression classifier on both data sets (A and B);
 % for this problem, use no regularization $(\alpha = 0)$. Describe your parameter
 % choices (stepsize, etc.) and show a plot of both the convergence of the
 % surrogate loss and error rate, and a plot of the final converged
 % classifier with the data (using e.g. plotClassify2D). In your report,
 % please also include the functions that you wrote (at minimum, train.m,
-% but possibly a few small helper functions as well)
+% but possibly a few small helper functions as well)*
 
 %%
 close all
