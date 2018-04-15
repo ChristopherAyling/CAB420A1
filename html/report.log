@@ -1,0 +1,642 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.6)  15 APR 2018 19:50
+entering extended mode
+**./report.tex
+(report.tex
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+) (report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count88
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count89
+\nofMParguments=\count90
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count91
+\MPscratchDim=\dimen106
+\MPnumerator=\count92
+\makeMPintoPDFobject=\count93
+\everyMPtoPDFconversion=\toks16
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 27.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 42.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 42.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+Package epstopdf Info: Source file: <report_01.eps>
+(epstopdf)                    date: 2018-04-15 19:45:18
+(epstopdf)                    size: 35380 bytes
+(epstopdf)             Output file: <report_01-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:25
+(epstopdf)                    size: 8491 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_01-eps-converted-to.
+pdf report_01.eps>
+(epstopdf)             \includegraphics on input line 156.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_01-eps-converted-to.pdf, id=21, 354.32375pt x 277.035pt>
+File: report_01-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_01-eps-converted-to.pdf>
+Package pdftex.def Info: report_01-eps-converted-to.pdf used on input line 156.
+
+(pdftex.def)             Requested size: 289.07999pt x 226.02881pt.
+ [4]
+Package epstopdf Info: Source file: <report_02.eps>
+(epstopdf)                    date: 2018-04-15 19:45:19
+(epstopdf)                    size: 39048 bytes
+(epstopdf)             Output file: <report_02-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:27
+(epstopdf)                    size: 10227 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_02-eps-converted-to.
+pdf report_02.eps>
+(epstopdf)             \includegraphics on input line 169.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_02-eps-converted-to.pdf, id=26, 354.32375pt x 277.035pt>
+File: report_02-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_02-eps-converted-to.pdf>
+Package pdftex.def Info: report_02-eps-converted-to.pdf used on input line 169.
+
+(pdftex.def)             Requested size: 289.07999pt x 226.02881pt.
+ [5 <./report_01-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_03.eps>
+(epstopdf)                    date: 2018-04-15 19:45:20
+(epstopdf)                    size: 38901 bytes
+(epstopdf)             Output file: <report_03-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:28
+(epstopdf)                    size: 10202 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_03-eps-converted-to.
+pdf report_03.eps>
+(epstopdf)             \includegraphics on input line 186.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_03-eps-converted-to.pdf, id=33, 354.32375pt x 277.035pt>
+File: report_03-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_03-eps-converted-to.pdf>
+Package pdftex.def Info: report_03-eps-converted-to.pdf used on input line 186.
+
+(pdftex.def)             Requested size: 289.07999pt x 226.02881pt.
+ [6 <./report_02-eps-converted-to.pdf>]
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 193--193
+[]\OT1/cmtt/m/n/10 training_MSE_of_fifth_degree_predictor = mse(fifthLearner, f
+ifthXtr, ytr)[] 
+ []
+
+
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 218--218
+[]\OT1/cmtt/m/n/10 test_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifth
+Xtst, ytst)[] 
+ []
+
+[7 <./report_03-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_04.eps>
+(epstopdf)                    date: 2018-04-15 19:45:21
+(epstopdf)                    size: 33589 bytes
+(epstopdf)             Output file: <report_04-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:29
+(epstopdf)                    size: 8509 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_04-eps-converted-to.
+pdf report_04.eps>
+(epstopdf)             \includegraphics on input line 255.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_04-eps-converted-to.pdf, id=47, 354.32375pt x 287.0725pt>
+File: report_04-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_04-eps-converted-to.pdf>
+Package pdftex.def Info: report_04-eps-converted-to.pdf used on input line 255.
+
+(pdftex.def)             Requested size: 289.07999pt x 234.21826pt.
+ [8]
+Overfull \hbox (64.49643pt too wide) in paragraph at lines 282--282
+[]      \OT1/cmtt/m/n/10 [Ntr,Mtr] = size(obj.Xtrain);          % get size of t
+raining, test data[] 
+ []
+
+
+Overfull \hbox (122.24593pt too wide) in paragraph at lines 282--282
+[]      \OT1/cmtt/m/n/10 classes = unique(obj.Ytrain);          % figure out ho
+w many classes & their labels[] 
+ []
+
+
+Overfull \hbox (106.49606pt too wide) in paragraph at lines 282--282
+[]      \OT1/cmtt/m/n/10 Yte = repmat(obj.Ytrain(1), [Nte,1]);  % make Ytest th
+e same data type as Ytrain[] 
+ []
+
+
+Overfull \hbox (90.7462pt too wide) in paragraph at lines 282--282
+[]      \OT1/cmtt/m/n/10 K = min(obj.K, Ntr);                  % can't have mor
+e than Ntrain neighbors[] 
+ []
+
+
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 282--282
+[]      \OT1/cmtt/m/n/10 for i=1:Nte                          % For each test e
+xample:[] 
+ []
+
+
+Overfull \hbox (221.99506pt too wide) in paragraph at lines 282--282
+[]        \OT1/cmtt/m/n/10 dist = sum( bsxfun( @minus, obj.Xtrain, Xte(i,:) ).\
+^{}2 , 2);  % compute sum of squared differences[] 
+ []
+
+
+Overfull \hbox (221.99506pt too wide) in paragraph at lines 282--282
+[]        \OT1/cmtt/m/n/10 %dist = sum( (obj.Xtrain - repmat(Xte(i,:),[Ntr,1]) 
+).^2 , 2);  % compute sum of squared differences[] 
+ []
+
+
+Overfull \hbox (153.74565pt too wide) in paragraph at lines 282--282
+[]        \OT1/cmtt/m/n/10 [tmp,idx] = sort(dist);              % find nearest 
+neighbors over Xtrain (dimension 2)[] 
+ []
+
+
+Overfull \hbox (216.7451pt too wide) in paragraph at lines 282--282
+[]                                            \OT1/cmtt/m/n/10 % idx(1) is the 
+index of the nearest point, etc.; see help sort[] 
+ []
+
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 282--282
+[]            \OT1/cmtt/m/n/10 kclosest\_vals = [kclosest\_vals, obj.Ytrain(idx
+(j))];[] 
+ []
+
+
+Overfull \hbox (179.99542pt too wide) in paragraph at lines 282--282
+[]\OT1/cmtt/m/n/10 %         Yte(i)=obj.Ytrain(idx(1));       % predict ith tes
+t example's value from nearest neighbors[] 
+ []
+
+[9 <./report_04-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_05.eps>
+(epstopdf)                    date: 2018-04-15 19:45:22
+(epstopdf)                    size: 38486 bytes
+(epstopdf)             Output file: <report_05-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:30
+(epstopdf)                    size: 9183 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_05-eps-converted-to.
+pdf report_05.eps>
+(epstopdf)             \includegraphics on input line 295.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_05-eps-converted-to.pdf, id=58, 354.32375pt x 287.0725pt>
+File: report_05-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_05-eps-converted-to.pdf>
+Package pdftex.def Info: report_05-eps-converted-to.pdf used on input line 295.
+
+(pdftex.def)             Requested size: 289.07999pt x 234.21826pt.
+Missing character: There is no “ in font cmr10!
+Missing character: There is no ” in font cmr10!
+ [10 <./report_05-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_06.eps>
+(epstopdf)                    date: 2018-04-15 19:45:24
+(epstopdf)                    size: 455981 bytes
+(epstopdf)             Output file: <report_06-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:31
+(epstopdf)                    size: 55006 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_06-eps-converted-to.
+pdf report_06.eps>
+(epstopdf)             \includegraphics on input line 317.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_06-eps-converted-to.pdf, id=66, 354.32375pt x 288.07625pt>
+File: report_06-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_06-eps-converted-to.pdf>
+Package pdftex.def Info: report_06-eps-converted-to.pdf used on input line 317.
+
+(pdftex.def)             Requested size: 289.07999pt x 235.0372pt.
+ [11 <./report_06-eps-converted-to.pdf>]
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 354--354
+[]\OT1/cmtt/m/n/10 MSE1 = zeros(100, 1); % initalise a vector for MSE of each k
+ value[] 
+ []
+
+
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 354--354
+[]    \OT1/cmtt/m/n/10 learner = knnRegress(k, xtr, ytr); % create the learner 
+using k[] 
+ []
+
+
+Overfull \hbox (69.74638pt too wide) in paragraph at lines 354--354
+[]    \OT1/cmtt/m/n/10 yhat = predict(learner, xtst); % predict and find MSE re
+lative to test data[] 
+ []
+
+Package epstopdf Info: Source file: <report_07.eps>
+(epstopdf)                    date: 2018-04-15 19:45:26
+(epstopdf)                    size: 23449 bytes
+(epstopdf)             Output file: <report_07-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:32
+(epstopdf)                    size: 3826 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_07-eps-converted-to.
+pdf report_07.eps>
+(epstopdf)             \includegraphics on input line 356.
+Package epstopdf Info: Output file is already uptodate.
+<report_07-eps-converted-to.pdf, id=74, 354.32375pt x 281.05pt>
+File: report_07-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_07-eps-converted-to.pdf>
+Package pdftex.def Info: report_07-eps-converted-to.pdf used on input line 356.
+
+(pdftex.def)             Requested size: 289.07999pt x 229.3046pt.
+Missing character: There is no “ in font cmr10!
+Missing character: There is no ” in font cmr10!
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 372--372
+[]\OT1/cmtt/m/n/10 MSE2 = zeros(100, 1); % initalise a vector for MSE of each k
+ value[] 
+ []
+
+
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 372--372
+[]    \OT1/cmtt/m/n/10 learner = knnRegress(k, xtr, ytr); % create the learner 
+using k[] 
+ []
+
+
+Overfull \hbox (69.74638pt too wide) in paragraph at lines 372--372
+[]    \OT1/cmtt/m/n/10 yhat = predict(learner, xtst); % predict and find MSE re
+lative to test data[] 
+ []
+
+[12 <./report_07-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_08.eps>
+(epstopdf)                    date: 2018-04-15 19:45:27
+(epstopdf)                    size: 25287 bytes
+(epstopdf)             Output file: <report_08-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:33
+(epstopdf)                    size: 4445 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_08-eps-converted-to.
+pdf report_08.eps>
+(epstopdf)             \includegraphics on input line 374.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_08-eps-converted-to.pdf, id=81, 354.32375pt x 281.05pt>
+File: report_08-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_08-eps-converted-to.pdf>
+Package pdftex.def Info: report_08-eps-converted-to.pdf used on input line 374.
+
+(pdftex.def)             Requested size: 289.07999pt x 229.3046pt.
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 400--400
+[]\OT1/cmtt/m/n/10 MSE3 = zeros(100, 1); % initalise a vector for MSE of each k
+ value[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 400--400
+[]    \OT1/cmtt/m/n/10 MSEtemp = zeros(4, 1); % temp mse array for each i (aver
+aged for each k)[] 
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 400--400
+[]        \OT1/cmtt/m/n/10 iTrain = setdiff(mTrain, iTest, 'rows'); % rest for 
+training[] 
+ []
+
+
+Overfull \hbox (64.49643pt too wide) in paragraph at lines 400--400
+[]        \OT1/cmtt/m/n/10 learner = knnRegress(k, iTrain(:,2), iTrain(:,1)); %
+ train the learner[] 
+ []
+
+
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 400--400
+[]        \OT1/cmtt/m/n/10 yhat = predict(learner, iTest(:,2)); % predict at te
+sting x values[] 
+ []
+
+[13 <./report_08-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_09.eps>
+(epstopdf)                    date: 2018-04-15 19:45:29
+(epstopdf)                    size: 28492 bytes
+(epstopdf)             Output file: <report_09-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:35
+(epstopdf)                    size: 5156 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_09-eps-converted-to.
+pdf report_09.eps>
+(epstopdf)             \includegraphics on input line 402.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_09-eps-converted-to.pdf, id=89, 369.38pt x 304.13625pt>
+File: report_09-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_09-eps-converted-to.pdf>
+Package pdftex.def Info: report_09-eps-converted-to.pdf used on input line 402.
+
+(pdftex.def)             Requested size: 289.07999pt x 238.01888pt.
+
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 430--430
+[]\OT1/cmtt/m/n/10 plot(X(Y==0,1), X(Y==0,2), 'ko', 'markersize',7, 'markerface
+color', 'red');[] 
+ []
+
+
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 430--430
+[]\OT1/cmtt/m/n/10 plot(X(Y==1,1), X(Y==1,2), 'ko', 'markersize',7, 'markerface
+color', 'green');[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 430--430
+[]\OT1/cmtt/m/n/10 plot(X(Y==2,1), X(Y==2,2), 'ko', 'markersize',7, 'markerface
+color', 'blue');[] 
+ []
+
+[14 <./report_09-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_10.eps>
+(epstopdf)                    date: 2018-04-15 19:45:30
+(epstopdf)                    size: 62339 bytes
+(epstopdf)             Output file: <report_10-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:36
+(epstopdf)                    size: 14302 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_10-eps-converted-to.
+pdf report_10.eps>
+(epstopdf)             \includegraphics on input line 432.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_10-eps-converted-to.pdf, id=97, 362.35374pt x 305.14pt>
+File: report_10-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_10-eps-converted-to.pdf>
+Package pdftex.def Info: report_10-eps-converted-to.pdf used on input line 432.
+
+(pdftex.def)             Requested size: 289.07999pt x 243.44183pt.
+Package epstopdf Info: Source file: <report_11.eps>
+(epstopdf)                    date: 2018-04-15 19:45:32
+(epstopdf)                    size: 317966 bytes
+(epstopdf)             Output file: <report_11-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:37
+(epstopdf)                    size: 17301 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_11-eps-converted-to.
+pdf report_11.eps>
+(epstopdf)             \includegraphics on input line 441.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_11-eps-converted-to.pdf, id=98, 347.2975pt x 277.035pt>
+File: report_11-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_11-eps-converted-to.pdf>
+Package pdftex.def Info: report_11-eps-converted-to.pdf used on input line 441.
+
+(pdftex.def)             Requested size: 289.07999pt x 230.60266pt.
+ [15 <./report_10-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_12.eps>
+(epstopdf)                    date: 2018-04-15 19:45:41
+(epstopdf)                    size: 317955 bytes
+(epstopdf)             Output file: <report_12-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:38
+(epstopdf)                    size: 17341 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_12-eps-converted-to.
+pdf report_12.eps>
+(epstopdf)             \includegraphics on input line 453.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_12-eps-converted-to.pdf, id=106, 346.29375pt x 276.03125pt>
+File: report_12-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_12-eps-converted-to.pdf>
+Package pdftex.def Info: report_12-eps-converted-to.pdf used on input line 453.
+
+(pdftex.def)             Requested size: 289.07999pt x 230.43262pt.
+ [16 <./report_11-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_13.eps>
+(epstopdf)                    date: 2018-04-15 19:45:41
+(epstopdf)                    size: 318169 bytes
+(epstopdf)             Output file: <report_13-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:40
+(epstopdf)                    size: 16880 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_13-eps-converted-to.
+pdf report_13.eps>
+(epstopdf)             \includegraphics on input line 455.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_13-eps-converted-to.pdf, id=114, 346.29375pt x 276.03125pt>
+File: report_13-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_13-eps-converted-to.pdf>
+Package pdftex.def Info: report_13-eps-converted-to.pdf used on input line 455.
+
+(pdftex.def)             Requested size: 289.07999pt x 230.43262pt.
+Package epstopdf Info: Source file: <report_14.eps>
+(epstopdf)                    date: 2018-04-15 19:45:42
+(epstopdf)                    size: 318149 bytes
+(epstopdf)             Output file: <report_14-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:41
+(epstopdf)                    size: 16887 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_14-eps-converted-to.
+pdf report_14.eps>
+(epstopdf)             \includegraphics on input line 457.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_14-eps-converted-to.pdf, id=115, 346.29375pt x 275.0275pt>
+File: report_14-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_14-eps-converted-to.pdf>
+Package pdftex.def Info: report_14-eps-converted-to.pdf used on input line 457.
+
+(pdftex.def)             Requested size: 289.07999pt x 229.59468pt.
+ [17 <./report_12-eps-converted-to.pdf> <./report_13-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_15.eps>
+(epstopdf)                    date: 2018-04-15 19:45:43
+(epstopdf)                    size: 317640 bytes
+(epstopdf)             Output file: <report_15-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:43
+(epstopdf)                    size: 16535 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_15-eps-converted-to.
+pdf report_15.eps>
+(epstopdf)             \includegraphics on input line 459.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_15-eps-converted-to.pdf, id=127, 346.29375pt x 275.0275pt>
+File: report_15-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_15-eps-converted-to.pdf>
+Package pdftex.def Info: report_15-eps-converted-to.pdf used on input line 459.
+
+(pdftex.def)             Requested size: 289.07999pt x 229.59468pt.
+ [18 <./report_14-eps-converted-to.pdf> <./report_15-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <report_16.eps>
+(epstopdf)                    date: 2018-04-15 19:45:44
+(epstopdf)                    size: 15431 bytes
+(epstopdf)             Output file: <report_16-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-15 19:46:44
+(epstopdf)                    size: 3423 bytes
+(epstopdf)             Command: <epstopdf --outfile=report_16-eps-converted-to.
+pdf report_16.eps>
+(epstopdf)             \includegraphics on input line 488.
+Package epstopdf Info: Output file is already uptodate.
+
+<report_16-eps-converted-to.pdf, id=139, 364.36125pt x 302.12875pt>
+File: report_16-eps-converted-to.pdf Graphic file (type pdf)
+
+<use report_16-eps-converted-to.pdf>
+Package pdftex.def Info: report_16-eps-converted-to.pdf used on input line 488.
+
+(pdftex.def)             Requested size: 289.07999pt x 239.71175pt.
+ [19 <./report_16-eps-converted-to.pdf>]
+[20] (report.aux) ) 
+Here is how much of TeX's memory you used:
+ 1614 strings out of 493323
+ 24222 string characters out of 3139070
+ 85702 words of memory out of 3000000
+ 5147 multiletter control sequences out of 15000+200000
+ 5326 words of font info for 20 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 39i,6n,25p,497b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (20 pages, 353916 bytes).
+PDF statistics:
+ 190 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+

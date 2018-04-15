@@ -150,7 +150,9 @@ Xtest = mTest(:,2);
 figure('name', 'Motorcycle Data');
 hold on
 plot(Xtrain, Ytrain, 'bo');
-title('Motorcycle Training Data')
+title('Motorcycle Training Data');
+xlabel('Time');
+ylabel('Acceleration');
 legend('Training data');
 hold off
 
@@ -166,16 +168,17 @@ hold on
 plot(Xtest, Ytest, 'go');
 plot(Xtest, Yhat, 'ro');
 legend('Y test', 'Y hat');
-title('1NN on Motorcycle Testing Data')
+title('1NN on Motorcycle Testing Data');
+xlabel('Time');
+ylabel('Acceleration');
 hold off
 
 %%
 % (b) Using the same technique as in Problem 1a, plot the predicted
 % function for several values of $k: 1, 2, 3, 5, 10, 50$. How does the
 % choice of $k$ relate to the “complexity” of the regression function?
-
 %
-% The higher the value of K, the lower the complexity.
+% ANS: The higher the value of K, the lower the complexity.
 %
 ks = [1, 2, 3, 4, 5, 10, 50];
 Xs = min(Xtrain):0.001:max(Xtrain); Xs = Xs';
@@ -284,7 +287,7 @@ m = length(Y);
 % (a) Plot the data by their feature values, using the class value to
 % select the color.
 figure('name', 'Iris Flowers')
-title('Iris flower data set')
+title('Iris Flowers')
 xlabel('Sepal Length')
 ylabel('Sepal Width')
 hold on
@@ -296,8 +299,12 @@ hold off
 %%
 % (b) Use the provided knnClassify class to learn a 1-nearest-neighbor
 % predictor.
-nnlearner = knnClassify(1, X, Y);
+k = 1
+nnlearner = knnClassify(k, X, Y);
 class2DPlot(nnlearner, X, Y);
+title(string(k) + 'NN Classifier');
+xlabel('Sepal Length');
+ylabel('Sepal Width ');
 
 %%
 % (c) Do the same thing for several values of k (say, [1, 3, 10, 30]) and
@@ -306,6 +313,9 @@ ks = [1, 3, 10, 30];
 for i=1:length(ks)
     learner = knnClassify(ks(i), X, Y);
     class2DPlot(learner, X, Y);
+    title(string(ks(i)) + 'NN Classifier');
+    xlabel('Sepal Length');
+    ylabel('Sepal Width ');
 end
 
 %%
