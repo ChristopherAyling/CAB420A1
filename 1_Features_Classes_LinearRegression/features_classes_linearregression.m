@@ -8,9 +8,11 @@ mTrain = load('data/mcycleTrain.txt');
 ytr = mTrain(:,1); 
 xtr = mTrain(:,2);
 %Plot the training data
+figure('name', 'Motorcycle Data');
 plot(xtr, ytr, 'bo');
 hold on;
 legend('Training data');
+title('Linear Predictor on Motorcycle Data');
 
 %% (b)
 linXtr = polyx(xtr, 1);
@@ -21,7 +23,7 @@ plot(xline, yline);
 legend('Training data', 'Linear predictor');
 
 %% (c)
-figure;
+figure('name', 'Motorcycle Data');
 plot(xtr, ytr, 'bo');
 hold on;
 fifthXtr = polyx(xtr, 5);
@@ -30,6 +32,7 @@ xline = [0:.01:2]';
 yline = predict(fifthLearner, polyx(xline, 5));
 plot(xline, yline);
 legend('Training data', 'Fifth degree polynomial');
+title('Fifth-Degree Polynomial Predictor on Motorcycle Data');
 axis([0 2 -150 100]);
 
 %% (d)

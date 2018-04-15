@@ -226,6 +226,10 @@ for k=1:100 % iterate on each k value
 end 
 figure;
 loglog(1:100, MSE1, 'r'); % plot on a loglog graph
+xlabel('K value');
+ylabel('MSE');
+title('MSE on different K values');
+legend('Only using first 20 training data examples');
 hold on;
 %%
 % (b) Repeat, but use all the training data. What happened? Contrast with
@@ -241,6 +245,8 @@ for k=1:100 % iterate on each k value
 end 
 
 loglog(1:100, MSE2, 'b'); % plot on the loglog graph
+legend('Only using first 20 training data examples', ...
+    'All training data examples');
 
 %%
 % (c) Using only the training data, estimate the curve using 4-fold
@@ -263,13 +269,10 @@ for k=1:100 % test for 100 values of k
     MSE3(k) = mean(MSEtemp); % average the MSE 
 end
 loglog(1:100, MSE3, 'm'); % plot on the loglog graph
-% Figure beautification
-xlabel('K value');
-ylabel('MSE');
 legend('Only using first 20 training data examples', ...
     'All training data examples', ...
     'All training data examples with 4-fold Cross-validation');
-title('MSE on different K values');
+
 %% 4. Nearest Neighbor Classifiers
 clc
 clear
@@ -344,7 +347,18 @@ hold off
 %%
 % (a) Show the two classes in a scatter plot and verify that one is
 % linearly separable while the other is not
-
+% Clean up
+clear;
+clc;
+close all;
+% Import 
+iris = load('data/iris.txt');
+X = iris(:,1:2); Y = iris(:,end); % use the first two features and classifier
+% Reformat data
+[X, Y] = shuffleData(X,Y); % shuffle the data 
+X = rescale(X);
+XA = X(Y<2,:); YA=Y(Y<2); % split into classes 0 and 1
+XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
 %%
 % (b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
 % it plots the two classes of data in dierent colors, along with the
