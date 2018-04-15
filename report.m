@@ -27,24 +27,55 @@
 
 %%
 % (a) Plot the training data in a scatter plot.
-
+%Clean up
+clc
+clear
+close all
+%Load in and set up variables
+mTrain = load('data/mcycleTrain.txt');
+ytr = mTrain(:,1); 
+xtr = mTrain(:,2);
+%Plot the training data
+plot(xtr, ytr, 'bo');
+hold on;
+legend('Training data');
 %%
 % (b) Create a linear predictor (slope and intercept) using the above
 % functions. Plot it on the same plot as the training data.
-
+linXtr = polyx(xtr, 1);
+linLearner = linearReg(linXtr, ytr);
+xline = [0:.01:2]';
+yline = predict(linLearner, polyx(xline, 1));
+plot(xline, yline);
+legend('Training data', 'Linear predictor');
 %%
 % (c) Create another plot with the data and a fifth-degree polynomial
-
+figure;
+plot(xtr, ytr, 'bo');
+hold on;
+fifthXtr = polyx(xtr, 5);
+fifthLearner = linearReg(fifthXtr, ytr);
+xline = [0:.01:2]';
+yline = predict(fifthLearner, polyx(xline, 5));
+plot(xline, yline);
+legend('Training data', 'Fifth degree polynomial');
+axis([0 2 -150 100]);
 %%
 % (d) Calculate the mean squared error associated with each of your learned
 % models on the training data.
+training_MSE_of_linear_predictor = mse(linLearner, linXtr, ytr)
+training_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifthXtr, ytr)
 
 %%
 % (e) Calculate the MSE for each model on the test data (in mcycleTest.txt).
+mTest = load('data/mcycleTest.txt');
+ytst = mTest(:,1);
+xtst = mTest(:,2);
+linXtst = polyx(xtst, 1);
+fifthXtst = polyx(xtst, 5);
 
-%%
-% (f) Don’t forget to label your plots; see help legend.
-
+test_MSE_of_linear_predictor = mse(linLearner, linXtst, ytst)
+test_MSE_of_fifth_degree_predictor = mse(fifthLearner, fifthXtst, ytst)
 %% 2. kNN Regression
 
 clc
@@ -116,11 +147,42 @@ hold off
 % model trained on only the first 20 training data examples for
 % $k = 1, 2, 3, . . . , 100$. Plot the MSE versus $k$ on a log-log scale
 % (see help loglog).
+%Clean up
+clc
+clear
+close all
+%Import data
+mTrain = load('data/mcycleTrain.txt');
+mTest = load('data/mcycleTest.txt');
+ytst = mTest(:,1); %  testing data 
+xtst = mTest(:,2);
 
+ytr = mTrain(1:20,1); % first 20 training data examples
+xtr = mTrain(1:20,2);
+MSE1 = zeros(100, 1); % initalise a vector for MSE of each k value
+
+for k=1:100 % iterate on each k value
+    learner = knnRegress(k, xtr, ytr); % create the learner using k
+    yhat = predict(learner, xtst); % predict and find MSE relative to test data
+    MSE1(k) = mean((yhat - ytst).^2);
+end 
+figure;
+loglog(1:100, MSE1, 'r'); % plot on a loglog graph
+hold on;
 %%
 % (b) Repeat, but use all the training data. What happened? Contrast with
 % your results from problem 1 (hint: which direction is “complexity” in this picture?).
+ytr = mTrain(:,1); % all training data examples
+xtr = mTrain(:,2);
+MSE2 = zeros(100, 1); % initalise a vector for MSE of each k value
 
+for k=1:100 % iterate on each k value
+    learner = knnRegress(k, xtr, ytr); % create the learner using k
+    yhat = predict(learner, xtst); % predict and find MSE relative to test data
+    MSE2(k) = mean((yhat - ytst).^2);
+end 
+
+loglog(1:100, MSE2, 'b'); % plot on the loglog graph
 
 %%
 % (c) Using only the training data, estimate the curve using 4-fold
@@ -129,7 +191,27 @@ hold off
 % testing data, then repeat three more times with different sets of 20 and
 % average the MSE. Add this curve to your plot. Why might we need to use
 % this technique?
-
+MSE3 = zeros(100, 1); % initalise a vector for MSE of each k value
+for k=1:100 % test for 100 values of k
+    MSEtemp = zeros(4, 1); % temp mse array for each i (averaged for each k)
+    for i=1:4
+        m = i*20; n = m-19; % local bounds
+        iTest = mTrain(n:m,:); % 20 indicies for testing
+        iTrain = setdiff(mTrain, iTest, 'rows'); % rest for training
+        learner = knnRegress(k, iTrain(:,2), iTrain(:,1)); % train the learner
+        yhat = predict(learner, iTest(:,2)); % predict at testing x values
+        MSEtemp(i) = mean((yhat - iTest(:,1)).^2); 
+    end
+    MSE3(k) = mean(MSEtemp); % average the MSE 
+end
+loglog(1:100, MSE3, 'm'); % plot on the loglog graph
+% Figure beautification
+xlabel('K value');
+ylabel('MSE');
+legend('Only using first 20 training data examples', ...
+    'All training data examples', ...
+    'All training data examples with 4-fold Cross-validation');
+title('MSE on different K values');
 %% 4. Nearest Neighbor Classifiers
 clc
 clear
