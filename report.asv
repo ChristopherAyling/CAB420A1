@@ -60,9 +60,9 @@
 %%
 % *(c) From these results, show that $L(w)$ is a convex function.*
 %
-% Function $L(\textbf{w})$ is convex because its Hessian $H_L$ is PSD. $H_L$
+% Function $L(\textbf{w)$ is convex because its Hessian ($H_L$) is PSD. $H_L$
 % can be shown to satisfy the criteria $\textbf{a}^T \textbf{H} \textbf{a} \geq 0$
-% because the output of all functions in the Hessian is always positive.
+% because the output of any function in the Hessian is always positive.
 %
 
 %% 1. Feature, Classes and Linear Regression
