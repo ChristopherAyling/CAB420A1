@@ -424,30 +424,8 @@ ylabel('Sepal Width');
 % decision boundary (a line). Include the listing of your code in your
 % report. To demo your function plot the decision boundary corresponding
 % to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$*
-
-% @logisticClassify2/plot2DLinear.m included here: 
-
-[n,d] = size(X);
-if (d~=2); error('Sorry -- plot2DLogistic only works on 2D data...'); end;
-% Plot X seperately (by Y)
-classes = getClasses(obj); % get the classes
-figure;hold on;
-for i = 1:size(classes) % loop over the classes
-    plot(X(Y==classes(i),1), X(Y==classes(i),2), '.'); % plot each point in this class
-end;
-% Plot decision boundary
-wts = getWeights(obj);
-x = linspace(min(X(:,1)), max(X(:,1))); 
-y = -(wts(2)/wts(3))*x - (wts(1)/wts(3)); % re-arranged formula of theta'X=0
-  
-p = plot(x,y); % plotting in a way that doesn't change axis
-set(p, 'YLimInclude', 'off');
-% Some Beautification
-xlabel('Sepal Length');
-ylabel('Sepal Width');
-title('Decision Boundry');
-legend('Class 1', 'Class 2', 'Decision Boundry');
-% End of @logisticClassify2/plot2DLinear.m
+%
+% <include>@logisticClassify2/plot2Dlinear.m</include>
 
 % Plot decision boundry using provided weights
 wts = [0.5 1 -0.25]; % set up the weights
@@ -463,12 +441,9 @@ plot2DLinear(learnerB, XB, YB);
 
 %%
 % *(c) Complete the predict.m function to make predictions for your linear classifier.*
-
-% @logisticClassify2/predict.m included here: 
-wts = getWeights(obj);
-Yte = sign(wts(1) + wts(2)*Xte(:,1) + wts(3)*Xte(:,2));
-Yte(Yte==-1) = obj.classes(1);
-Yte(Yte==1) = obj.classes(2);
+%
+% <include>@logisticClassify2/predict.m</include>
+%
 
 %%
 % *(d)*
@@ -490,15 +465,15 @@ Yte(Yte==1) = obj.classes(2);
 %
 % $$ y^{j} \frac{\partial}{\partial \theta} \log \left( 1+e^{-\theta x^{j}} \right) $$
 %
-% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( 1+e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}} $$
+% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( 1+e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$
 %
-% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}} $$
+% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$
 %
-% $$ \frac{-x^{j} y^{j} e^{-\theta x^{j}} }{1+e^{-\theta x^{j}} $$
+% $$ \frac{-x^{j} y^{j} e^{-\theta x^{j}} }{1+e^{-\theta x^{j}}} $$
 % 
 % Simplifies to: 
 %
-% $$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}} $$
+% $$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}}} $$
 %
 % Now find partial derivative: 
 %

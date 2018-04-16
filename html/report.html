@@ -232,6 +232,12 @@ MSE2 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each
 loglog(1:100, MSE2, <span class="string">'b'</span>); <span class="comment">% plot on the loglog graph</span>
 legend(<span class="string">'Only using first 20 training data examples'</span>, <span class="keyword">...</span>
     <span class="string">'All training data examples'</span>);
+<span class="comment">%</span>
+<span class="comment">% _When using all training data, the MSE was able to be reduced much</span>
+<span class="comment">% further.Contrast to problem 1, here we are increasing the complexity  of</span>
+<span class="comment">% the sample (or training data) to reduce cost. Whereas in problem one we</span>
+<span class="comment">% increased the model complexity by raising to 5th degree polynomial._</span>
+<span class="comment">%</span>
 </pre><img vspace="5" hspace="5" src="report_08.png" alt=""> <p><b>(c) Using only the training data, estimate the curve using 4-fold cross-validation. Split the training data into two parts, indices 1:20 and 21:80; use the larger of the two as training data and the smaller as testing data, then repeat three more times with different sets of 20 and average the MSE. Add this curve to your plot. Why might we need to use this technique?</b></p><pre class="codeinput">MSE3 = zeros(100, 1); <span class="comment">% initalise a vector for MSE of each k value</span>
 <span class="keyword">for</span> k=1:100 <span class="comment">% test for 100 values of k</span>
     MSEtemp = zeros(4, 1); <span class="comment">% temp mse array for each i (averaged for each k)</span>
@@ -249,6 +255,13 @@ loglog(1:100, MSE3, <span class="string">'m'</span>); <span class="comment">% pl
 legend(<span class="string">'Only using first 20 training data examples'</span>, <span class="keyword">...</span>
     <span class="string">'All training data examples'</span>, <span class="keyword">...</span>
     <span class="string">'All training data examples with 4-fold Cross-validation'</span>);
+<span class="comment">%</span>
+<span class="comment">% _Using this technique may produce more accurate error values. This is</span>
+<span class="comment">% because the effective 'testing data' changes multiple times per</span>
+<span class="comment">% iteration, making it a better representation of the model. Also, in this</span>
+<span class="comment">% case more data samples are used for testing because mTest only has 50</span>
+<span class="comment">% samples relative to the 80 in mTrain.</span>
+<span class="comment">%</span>
 </pre><img vspace="5" hspace="5" src="report_09.png" alt=""> <h2 id="20">4. Nearest Neighbor Classifiers</h2><pre class="codeinput">clc
 clear
 <span class="comment">% Load Iris Dataset</span>
@@ -318,7 +331,75 @@ X = iris(:,1:2); Y = iris(:,end); <span class="comment">% use the first two feat
 X = rescale(X);
 XA = X(Y&lt;2,:); YA=Y(Y&lt;2); <span class="comment">% split into classes 0 and 1</span>
 XB = X(Y&gt;0,:); YB=Y(Y&gt;0); <span class="comment">% and 1 and 2</span>
-</pre><p><b>(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that it plots the two classes of data in dierent colors, along with the decision boundary (a line). Include the listing of your code in your report. To demo your function plot the decision boundary corresponding to the classifier <img src="report_eq09323166714417258934.png" alt="$$ sign(.5 + 1x_1 - .25x_2) $$"></b></p><p><b>(c) Complete the predict.m function to make predictions for your linear classifier.</b></p><p><b>(d)</b></p><p><img src="report_eq05263605100582824169.png" alt="$$ \sigma\left( 1 + exp(-z) \right)^{-1} $$"></p><p><img src="report_eq07692817195444262305.png" alt="$$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$"></p><p><b>Derive the gradient of the regularized negative log likelihood <img src="report_eq12875208084026382776.png" alt="$J_j$"> for logistic regression, and give it in your report</b></p><p><b>(e) Complete your train.m function to perform stochastic gradient descent on the logistic loss function.</b></p><p><b>(1) computing the surrogate loss function at each iteration</b></p><p><b>(2) computing the prediction and gradient associated with each data point</b></p><p><b>(3) a gradient step on the parameters <img src="report_eq08288499342375314727.png" alt="$\theta$"></b></p><p><b>(4) a stopping criterion.</b></p><p><b>(f) Run your logistic regression classifier on both data sets (A and B); for this problem, use no regularization <img src="report_eq06806086399984933598.png" alt="$(\alpha = 0)$">. Describe your parameter choices (stepsize, etc.) and show a plot of both the convergence of the surrogate loss and error rate, and a plot of the final converged classifier with the data (using e.g. plotClassify2D). In your report, please also include the functions that you wrote (at minimum, train.m, but possibly a few small helper functions as well)</b></p><pre class="codeinput">close <span class="string">all</span>
+
+<span class="comment">% Plot class 0 vs 1</span>
+figure;
+plot(XA(:,1), XA(:,2), <span class="string">'b.'</span>);
+title(<span class="string">'Class 0 vs Class 1 (Separable)'</span>);
+xlabel(<span class="string">'Sepal Length'</span>);
+ylabel(<span class="string">'Sepal Width'</span>);
+<span class="comment">% Plot class 1 vs 2</span>
+figure;
+plot(XB(:,1), XB(:,2), <span class="string">'b.'</span>);
+title(<span class="string">'Class 1 vs Class 2 (Non-Separable)'</span>);
+xlabel(<span class="string">'Sepal Length'</span>);
+ylabel(<span class="string">'Sepal Width'</span>);
+</pre><img vspace="5" hspace="5" src="report_17.png" alt=""> <img vspace="5" hspace="5" src="report_18.png" alt=""> <p><b>(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that it plots the two classes of data in dierent colors, along with the decision boundary (a line). Include the listing of your code in your report. To demo your function plot the decision boundary corresponding to the classifier <img src="report_eq09323166714417258934.png" alt="$$ sign(.5 + 1x_1 - .25x_2) $$"></b></p><pre class="language-matlab">
+<span class="keyword">function</span> plot2DLinear(obj, X, Y)
+<span class="comment">% plot2DLinear(obj, X,Y)</span>
+<span class="comment">%   plot a linear classifier (data and decision boundary) when features X are 2-dim</span>
+<span class="comment">%   wts are 1x3,  wts(1)+wts(2)*X(1)+wts(3)*X(2)</span>
+<span class="comment">%</span>
+  [n,d] = size(X);
+  <span class="keyword">if</span> (d~=2); error(<span class="string">'Sorry -- plot2DLogistic only works on 2D data...'</span>); <span class="keyword">end</span>;
+
+<span class="comment">  %% Plot X seperately (by Y)</span>
+  classes = getClasses(obj); <span class="comment">% get the classes</span>
+  figure;
+  hold <span class="string">on</span>;
+  
+  <span class="keyword">for</span> i = 1:size(classes) <span class="comment">% loop over the classes</span>
+      plot(X(Y==classes(i),1), X(Y==classes(i),2), <span class="string">'.'</span>); <span class="comment">% plot each point in this class</span>
+  <span class="keyword">end</span>;
+  
+<span class="comment">  %% Plot decision boundary</span>
+  wts = getWeights(obj);
+  x = linspace(min(X(:,1)), max(X(:,1))); 
+  y = -(wts(2)/wts(3))*x - (wts(1)/wts(3)); <span class="comment">% re-arranged formula of theta'X=0</span>
+  
+  p = plot(x,y); <span class="comment">% plotting in a way that doesn't change axis</span>
+  set(p, <span class="string">'YLimInclude'</span>, <span class="string">'off'</span>);
+  
+<span class="comment">  %% Some Beautification</span>
+  xlabel(<span class="string">'Sepal Length'</span>);
+  ylabel(<span class="string">'Sepal Width'</span>);
+  title(<span class="string">'Decision Boundry'</span>);
+  legend(<span class="string">'Class 1'</span>, <span class="string">'Class 2'</span>, <span class="string">'Decision Boundry'</span>);
+
+</pre><pre class="codeinput"><span class="comment">% Plot decision boundry using provided weights</span>
+wts = [0.5 1 -0.25]; <span class="comment">% set up the weights</span>
+learnerA = logisticClassify2(); <span class="comment">% create "blank" learners</span>
+learnerB = logisticClassify2();
+learnerA = setClasses(learnerA, unique(YA)); <span class="comment">% define class labels</span>
+learnerB = setClasses(learnerB, unique(YB));
+
+learnerA=setWeights(learnerA, wts); <span class="comment">% set the learner's parameters</span>
+learnerB=setWeights(learnerB, wts);
+plot2DLinear(learnerA, XA, YA); <span class="comment">% plot</span>
+plot2DLinear(learnerB, XB, YB);
+</pre><img vspace="5" hspace="5" src="report_19.png" alt=""> <img vspace="5" hspace="5" src="report_20.png" alt=""> <p><b>(c) Complete the predict.m function to make predictions for your linear classifier.</b></p><pre class="language-matlab">
+<span class="keyword">function</span> Yte = predict(obj,Xte)
+<span class="comment">% Yhat = predict(obj, X)  : make predictions on test data X</span>
+
+<span class="comment">% (1) make predictions based on the sign of wts(1) + wts(2)*x(:,1) + ...</span>
+<span class="comment">% (2) convert predictions to saved classes: Yte = obj.classes( [1 or 2] );</span>
+
+wts = getWeights(obj);
+Yte = sign(wts(1) + wts(2)*Xte(:,1) + wts(3)*Xte(:,2));
+Yte(Yte==-1) = obj.classes(1);
+Yte(Yte==1) = obj.classes(2);
+
+</pre><p><b>(d)</b></p><p><img src="report_eq05263605100582824169.png" alt="$$ \sigma\left( 1 + exp(-z) \right)^{-1} $$"></p><p><img src="report_eq07692817195444262305.png" alt="$$ J_j(\theta) = -y^{j} \log \sigma \left( \theta x^{(j)T} \right) -(1-y^{(j)}) \log \left( 1-\sigma \left( \theta x^{(j)T} \right) \right) + \alpha \displaystyle\sum_i \theta_i^2 $$"></p><p><b>Derive the gradient of the regularized negative log likelihood <img src="report_eq12875208084026382776.png" alt="$J_j$"> for logistic regression, and give it in your report</b></p><p>Expand <img src="report_eq07375667759870236575.png" alt="$J_j(\theta)$"> by substituting in <img src="report_eq11373214381793991308.png" alt="$\sigma$"> and simplify:</p><p><img src="report_eq13260320958420235786.png" alt="$$ J_j(\theta) = y^{j} \log \left( 1+e^{-\theta x^{j}} \right) -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1} \right) + \alpha \displaystyle\sum_i \theta_i^2 $$"></p><p>Now find partial derivative:</p><p><img src="report_eq14302788403764188448.png" alt="$$ \frac{\partial}{\partial \theta} y^{j} \log \left( 1+e^{-\theta x^{j}} \right) $$"></p><p><img src="report_eq00810615556175609348.png" alt="$$ y^{j} \frac{\partial}{\partial \theta} \log \left( 1+e^{-\theta x^{j}} \right) $$"></p><p><img src="report_eq13094095505928680069.png" alt="$$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( 1+e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$"></p><p><img src="report_eq18130495940197530790.png" alt="$$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$"></p><p><img src="report_eq06289038150747125837.png" alt="$$ \frac{-x^{j} y^{j} e^{-\theta x^{j}} }{1+e^{-\theta x^{j}}} $$"></p><p>Simplifies to:</p><p><img src="report_eq01877661597583727250.png" alt="$$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}}} $$"></p><p>Now find partial derivative:</p><p><img src="report_eq10044779479249472818.png" alt="$$ \frac{\partial}{\partial \theta} -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$"></p><p><img src="report_eq14336105617983166070.png" alt="$$ (y^{(j)}-1) \frac{\partial}{\partial \theta} \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$"></p><p><img src="report_eq07014326382618452041.png" alt="$$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$"></p><p><img src="report_eq07014326382618452041.png" alt="$$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$"></p><p><b>(e) Complete your train.m function to perform stochastic gradient descent on the logistic loss function.</b></p><p><b>(1) computing the surrogate loss function at each iteration</b></p><p><b>(2) computing the prediction and gradient associated with each data point</b></p><p><b>(3) a gradient step on the parameters <img src="report_eq08288499342375314727.png" alt="$\theta$"></b></p><p><b>(4) a stopping criterion.</b></p><p><b>(f) Run your logistic regression classifier on both data sets (A and B); for this problem, use no regularization <img src="report_eq06806086399984933598.png" alt="$(\alpha = 0)$">. Describe your parameter choices (stepsize, etc.) and show a plot of both the convergence of the surrogate loss and error rate, and a plot of the final converged classifier with the data (using e.g. plotClassify2D). In your report, please also include the functions that you wrote (at minimum, train.m, but possibly a few small helper functions as well)</b></p><pre class="codeinput">close <span class="string">all</span>
 </pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% 2018 - CAB420 - Machine Learning
@@ -579,7 +660,12 @@ end
 loglog(1:100, MSE2, 'b'); % plot on the loglog graph
 legend('Only using first 20 training data examples', ...
     'All training data examples');
-
+%
+% _When using all training data, the MSE was able to be reduced much
+% further.Contrast to problem 1, here we are increasing the complexity  of
+% the sample (or training data) to reduce cost. Whereas in problem one we
+% increased the model complexity by raising to 5th degree polynomial._
+%
 %%
 % *(c) Using only the training data, estimate the curve using 4-fold
 % cross-validation. Split the training data into two parts, indices 1:20
@@ -604,7 +690,13 @@ loglog(1:100, MSE3, 'm'); % plot on the loglog graph
 legend('Only using first 20 training data examples', ...
     'All training data examples', ...
     'All training data examples with 4-fold Cross-validation');
-
+%
+% _Using this technique may produce more accurate error values. This is
+% because the effective 'testing data' changes multiple times per
+% iteration, making it a better representation of the model. Also, in this
+% case more data samples are used for testing because mTest only has 50
+% samples relative to the 80 in mTrain.
+%
 %% 4. Nearest Neighbor Classifiers
 clc
 clear
@@ -717,15 +809,45 @@ X = iris(:,1:2); Y = iris(:,end); % use the first two features and classifier
 X = rescale(X);
 XA = X(Y<2,:); YA=Y(Y<2); % split into classes 0 and 1
 XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
+
+% Plot class 0 vs 1
+figure; 
+plot(XA(:,1), XA(:,2), 'b.');
+title('Class 0 vs Class 1 (Separable)');
+xlabel('Sepal Length');
+ylabel('Sepal Width');
+% Plot class 1 vs 2
+figure;
+plot(XB(:,1), XB(:,2), 'b.');
+title('Class 1 vs Class 2 (Non-Separable)');
+xlabel('Sepal Length');
+ylabel('Sepal Width');
 %%
 % *(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
 % it plots the two classes of data in dierent colors, along with the
 % decision boundary (a line). Include the listing of your code in your
 % report. To demo your function plot the decision boundary corresponding
 % to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$*
+%
+% <include>@logisticClassify2/plot2Dlinear.m</include>
+
+% Plot decision boundry using provided weights
+wts = [0.5 1 -0.25]; % set up the weights
+learnerA = logisticClassify2(); % create "blank" learners
+learnerB = logisticClassify2();
+learnerA = setClasses(learnerA, unique(YA)); % define class labels 
+learnerB = setClasses(learnerB, unique(YB));
+
+learnerA=setWeights(learnerA, wts); % set the learner's parameters
+learnerB=setWeights(learnerB, wts);
+plot2DLinear(learnerA, XA, YA); % plot
+plot2DLinear(learnerB, XB, YB); 
 
 %%
 % *(c) Complete the predict.m function to make predictions for your linear classifier.*
+%
+% <include>@logisticClassify2/predict.m</include>
+%
 
 %%
 % *(d)*
@@ -736,6 +858,37 @@ XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
 % 
 % *Derive the gradient of the regularized negative log likelihood $J_j$ for
 % logistic regression, and give it in your report*
+%
+% Expand $J_j(\theta)$ by substituting in $\sigma$ and simplify:
+%
+% $$ J_j(\theta) = y^{j} \log \left( 1+e^{-\theta x^{j}} \right) -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1} \right) + \alpha \displaystyle\sum_i \theta_i^2 $$
+%
+% Now find partial derivative: 
+%
+% $$ \frac{\partial}{\partial \theta} y^{j} \log \left( 1+e^{-\theta x^{j}} \right) $$
+%
+% $$ y^{j} \frac{\partial}{\partial \theta} \log \left( 1+e^{-\theta x^{j}} \right) $$
+%
+% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( 1+e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$
+%
+% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}}} $$
+%
+% $$ \frac{-x^{j} y^{j} e^{-\theta x^{j}} }{1+e^{-\theta x^{j}}} $$
+% 
+% Simplifies to: 
+%
+% $$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}}} $$
+%
+% Now find partial derivative: 
+%
+% $$ \frac{\partial}{\partial \theta} -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$
+%
+% $$ (y^{(j)}-1) \frac{\partial}{\partial \theta} \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$
+%
+% $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
+%
+% $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
+
 
 %%
 % *(e) Complete your train.m function to perform stochastic gradient descent
