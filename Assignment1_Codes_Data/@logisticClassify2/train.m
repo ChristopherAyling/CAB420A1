@@ -34,7 +34,7 @@ function obj = train(obj, X, Y, varargin)
     i=i+1;
   end;
 
-  X1    = [ones(n,1), X];     % make a version of training data with the constant feature
+  X1 = [ones(n,1), X];     % make a version of training data with the constant feature
 
   Yin = Y;                              % save original Y in case needed later
   obj.classes = unique(Yin);
@@ -72,14 +72,17 @@ while (~done)
     
     
     % Compute gradient:
-    etx = exp(obj.wts*X1(j,:)); % compute e^theta*x
-    grad = ((X1(j,:) * (etx - Y(j) - (Y(j)*etx)))... 
+    etx = exp(obj.wts*X1(j,:)'); % compute e^theta*x
+    grad = ((-X1(j,:)*Y(j) + X1(j,:)*etx*(Y(j) - 1))... 
         ./ (etx + 1)) + (stepsize * sum(2*obj.wts))
     
     obj.wts = obj.wts - step * grad;% take a step down the gradient
   end;
-
-  done = false;
+  
+  if iter >= stopIter
+      done = true;
+  end;
+  
   %%% TODO: Check for stopping conditions
 
   wtsold = obj.wts;
