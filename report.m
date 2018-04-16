@@ -467,8 +467,15 @@ plot2DLinear(learnerB, XB, YB);
 %
 % $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
 %
-% $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
-
+% $$ \frac{(y^{(j)}-1) \left( \frac{\frac{\partial}{\partial \theta} e^{-\theta x^{j}} }{(1 + e^{-\theta x^{j}})^{2}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
+%
+% $$ \frac{(y^{(j)}-1)  \left( e^{-\theta x^{j}} \frac{\partial}{\partial \theta} -\theta x^{j} \right)}{\left( 1- \frac{1}{1 + e^{-\theta x^{j}}} \right) \left( 1 + e^{-\theta x^{j}} \right)^2} $$
+%
+% $$ \frac{(y^{(j)}-1)  \left( -x^{j}e^{-\theta x^{j}} \right)}{\left( 1- \frac{1}{1 + e^{-\theta x^{j}}} \right) \left( 1 + e^{-\theta x^{j}} \right)^2} $$
+% 
+% Simplifies to: 
+%
+% $$ -\frac{x^{j} e^{\theta x^{j}} \left( y^{j} - 1 \right) }{e^{\theta x^{j}} + 1} $$
 
 %%
 % *(e) Complete your train.m function to perform stochastic gradient descent
