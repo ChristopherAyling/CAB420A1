@@ -256,12 +256,7 @@ end
 loglog(1:100, MSE2, 'b'); % plot on the loglog graph
 legend('Only using first 20 training data examples', ...
     'All training data examples');
-%
-% _When using all training data, the MSE was able to be reduced much
-% further.Contrast to problem 1, here we are increasing the complexity  of
-% the sample (or training data) to reduce cost. Whereas in problem one we
-% increased the model complexity by raising to 5th degree polynomial._
-%
+
 %%
 % *(c) Using only the training data, estimate the curve using 4-fold
 % cross-validation. Split the training data into two parts, indices 1:20
@@ -286,13 +281,7 @@ loglog(1:100, MSE3, 'm'); % plot on the loglog graph
 legend('Only using first 20 training data examples', ...
     'All training data examples', ...
     'All training data examples with 4-fold Cross-validation');
-%
-% _Using this technique may produce more accurate error values. This is
-% because the effective 'testing data' changes multiple times per
-% iteration, making it a better representation of the model. Also, in this
-% case more data samples are used for testing because mTest only has 50
-% samples relative to the 80 in mTrain.
-%
+
 %% 4. Nearest Neighbor Classifiers
 clc
 clear
@@ -335,7 +324,7 @@ legend('Setosa', 'Versicolor', 'Virginica')
 % _The higher the value of k, the smoother the desicion boundary. When k is
 % close to 1, the classifier is prone to outliers. In general, this means
 % that a larger value of K will likely lead to better generalisation and 
-% therefore a higher test time accuracy._
+% therefore a higher test time accuracy_
 
 ks = [1, 3, 10, 30];
 for i=1:length(ks)
@@ -355,11 +344,7 @@ end
 % data? Comment on the performance at the two endpoints, in terms of over-
 % or under-fitting.*
 %
-% _k=10 to k=50 appears to generalize best on the training data. When k is
-% near 1, the classifier overfits to the training data (k=1 has an accuracy of
-% 1.0) when k gets too large however, the classifier underfits. When 
-% over fitting/underfitting occur depend on the size and shape of the
-% dataset._
+% _k=50 appears to generalize best on the training data._
 %
 %
 
@@ -372,19 +357,22 @@ Ytest = Y(train_size+1:end,:);
 
 figure('name', 'Errors vs K');
 hold on
-
 ks = [1, 2, 5, 10, 50, 100, 200];
-errors = [];
-for i=1:length(ks)
-    learner = knnClassify(ks(i), Xtrain, Ytrain);
-    Yhat = predict(learner, Xtest);
-    errors = [errors, sum(Yhat ~= Ytest)];
+
+for j=1:10
+    
+    errors = [];
+    for i=1:length(ks)
+        learner = knnClassify(ks(i), Xtrain, Ytrain);
+        Yhat = predict(learner, Xtest);
+        errors = [errors, sum(Yhat ~= Ytest)];
+    end
 end
 
 title('Errors vs K Using Iris Dataset');
 xlabel('K');
 ylabel('Errors');
-plot(errors);
+
 xticklabels(ks)
 hold off
 
@@ -405,19 +393,6 @@ X = iris(:,1:2); Y = iris(:,end); % use the first two features and classifier
 X = rescale(X);
 XA = X(Y<2,:); YA=Y(Y<2); % split into classes 0 and 1
 XB = X(Y>0,:); YB=Y(Y>0); % and 1 and 2
-
-% Plot class 0 vs 1
-figure; 
-plot(XA(:,1), XA(:,2), 'b.');
-title('Class 0 vs Class 1 (Separable)');
-xlabel('Sepal Length');
-ylabel('Sepal Width');
-% Plot class 1 vs 2
-figure;
-plot(XB(:,1), XB(:,2), 'b.');
-title('Class 1 vs Class 2 (Non-Separable)');
-xlabel('Sepal Length');
-ylabel('Sepal Width');
 %%
 % *(b) Write (fill in) the function @logisticClassify2/plot2DLinear.m so that
 % it plots the two classes of data in dierent colors, along with the
@@ -425,50 +400,8 @@ ylabel('Sepal Width');
 % report. To demo your function plot the decision boundary corresponding
 % to the classifier $$ sign(.5 + 1x_1 - .25x_2) $$*
 
-% @logisticClassify2/plot2DLinear.m included here: 
-
-[n,d] = size(X);
-if (d~=2); error('Sorry -- plot2DLogistic only works on 2D data...'); end;
-% Plot X seperately (by Y)
-classes = getClasses(obj); % get the classes
-figure;hold on;
-for i = 1:size(classes) % loop over the classes
-    plot(X(Y==classes(i),1), X(Y==classes(i),2), '.'); % plot each point in this class
-end;
-% Plot decision boundary
-wts = getWeights(obj);
-x = linspace(min(X(:,1)), max(X(:,1))); 
-y = -(wts(2)/wts(3))*x - (wts(1)/wts(3)); % re-arranged formula of theta'X=0
-  
-p = plot(x,y); % plotting in a way that doesn't change axis
-set(p, 'YLimInclude', 'off');
-% Some Beautification
-xlabel('Sepal Length');
-ylabel('Sepal Width');
-title('Decision Boundry');
-legend('Class 1', 'Class 2', 'Decision Boundry');
-% End of @logisticClassify2/plot2DLinear.m
-
-% Plot decision boundry using provided weights
-wts = [0.5 1 -0.25]; % set up the weights
-learnerA = logisticClassify2(); % create "blank" learners
-learnerB = logisticClassify2();
-learnerA = setClasses(learnerA, unique(YA)); % define class labels 
-learnerB = setClasses(learnerB, unique(YB));
-
-learnerA=setWeights(learnerA, wts); % set the learner's parameters
-learnerB=setWeights(learnerB, wts);
-plot2DLinear(learnerA, XA, YA); % plot
-plot2DLinear(learnerB, XB, YB); 
-
 %%
 % *(c) Complete the predict.m function to make predictions for your linear classifier.*
-
-% @logisticClassify2/predict.m included here: 
-wts = getWeights(obj);
-Yte = sign(wts(1) + wts(2)*Xte(:,1) + wts(3)*Xte(:,2));
-Yte(Yte==-1) = obj.classes(1);
-Yte(Yte==1) = obj.classes(2);
 
 %%
 % *(d)*
@@ -479,37 +412,6 @@ Yte(Yte==1) = obj.classes(2);
 % 
 % *Derive the gradient of the regularized negative log likelihood $J_j$ for
 % logistic regression, and give it in your report*
-%
-% Expand $J_j(\theta)$ by substituting in $\sigma$ and simplify:
-%
-% $$ J_j(\theta) = y^{j} \log \left( 1+e^{-\theta x^{j}} \right) -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1} \right) + \alpha \displaystyle\sum_i \theta_i^2 $$
-%
-% Now find partial derivative: 
-%
-% $$ \frac{\partial}{\partial \theta} y^{j} \log \left( 1+e^{-\theta x^{j}} \right) $$
-%
-% $$ y^{j} \frac{\partial}{\partial \theta} \log \left( 1+e^{-\theta x^{j}} \right) $$
-%
-% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( 1+e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}} $$
-%
-% $$ \frac{y^{j} \frac{\partial}{\partial \theta} \left( e^{-\theta x^{j}} \right)}{1+e^{-\theta x^{j}} $$
-%
-% $$ \frac{-x^{j} y^{j} e^{-\theta x^{j}} }{1+e^{-\theta x^{j}} $$
-% 
-% Simplifies to: 
-%
-% $$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}} $$
-%
-% Now find partial derivative: 
-%
-% $$ \frac{\partial}{\partial \theta} -(1-y^{(j)}) \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$
-%
-% $$ (y^{(j)}-1) \frac{\partial}{\partial \theta} \log \left( 1- \left( 1 + e^{-\theta x^{j}} \right)^{-1}\right) $$
-%
-% $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
-%
-% $$ \frac{(y^{(j)}-1) \frac{\partial}{\partial \theta} \left( \frac{-1}{ 1 + e^{-\theta x^{j}}} \right)}{1- \frac{1}{1 + e^{-\theta x^{j}}}} $$
-
 
 %%
 % *(e) Complete your train.m function to perform stochastic gradient descent
