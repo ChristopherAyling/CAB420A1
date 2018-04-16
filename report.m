@@ -17,17 +17,17 @@
 %
 % $$ u = 1 + e^{y_i \left( \textbf{w}^T \textbf{x} + b \right)} $$
 %
-% $$ L(\textbf{w}) = -\displaystyle\sum_{i=1}^{N} -log(u) + \lambda \|\textbf{w}\|_2^2 $$
+% $$ L(\textbf{w}) = \displaystyle\sum_{i=1}^{N} log(u) + \lambda \|\textbf{w}\|_2^2 $$
 %
-% $$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial u} - log(u) \frac{\partial u}{\partial \textbf{w}_j} +  \frac{\partial}{\partial \textbf{w}_j} \lambda \|\textbf{w}\|_2^2 $$
+% $$ \frac{\partial L}{\partial \textbf{w}_j} = \displaystyle\sum_{i=1}^{N} \frac{\partial}{\partial u} log(u) \frac{\partial u}{\partial \textbf{w}_j} + \frac{\partial}{\partial \textbf{w}_j} \lambda \|\textbf{w}\|_2^2 $$
 %
-% $$ \frac{\partial}{\partial w_j} \lambda \|\textbf{w}\|_2^2 = 2 \lambda \textbf{w}_j $$
+% $$ \frac{\partial}{\partial \textbf{w}_j} \lambda \|\textbf{w}\|_2^2 = 2 \lambda \textbf{w}_j $$
 %
-% $$ \frac{\partial}{\partial u} -log(u) = \frac{-1}{u} $$
+% $$ \frac{\partial}{\partial u} log(u) = \frac{1}{u} $$
 %
-% $$ \frac{\partial u }{\partial \textbf{w}_j} = y_i \textbf{x}_i e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$
+% $$ \frac{\partial u }{\partial \textbf{w}_j} = y_i \textbf{x}_{ij} e^{y_i(\textbf{w}^T \textbf{x}_i + b)} $$
 %
-% $$ \frac{\partial L}{\partial \textbf{w}_j} = -\displaystyle\sum_{i=1}^{N} 2 \lambda \textbf{w}_j - \frac{y_i \textbf{x}_i e^{y_i(\textbf{w}^T _i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} $$
+% $$ \frac{\partial L}{\partial \textbf{w}_j} = \displaystyle\sum_{i=1}^{N} \frac{y_i \textbf{x}_{ij} e^{y_i(\textbf{w}^T _i + b)}}{1 + e^{y_i \left( \textbf{w}^T \textbf{x}_i + b \right)}} + 2 \lambda \textbf{w}_j $$
 %
 
 
