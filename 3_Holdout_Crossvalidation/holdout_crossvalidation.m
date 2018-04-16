@@ -1,4 +1,4 @@
-%% 4. Hold-out and Cross-validation
+%% 3. Hold-out and Cross-validation
 %% Import data
 %Clean up
 clc
