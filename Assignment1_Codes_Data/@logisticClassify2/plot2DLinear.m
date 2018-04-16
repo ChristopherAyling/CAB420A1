@@ -16,7 +16,6 @@ function plot2DLinear(obj, X, Y)
   end;
   
   %% Plot decision boundary
-  %b = sign(getWeights(obj).*[ones(size(X,1),1), X]);
   wts = getWeights(obj);
   x = linspace(min(X(:,1)), max(X(:,1))); 
   y = -(wts(2)/wts(3))*x - (wts(1)/wts(3)); % re-arranged formula of theta'X=0
