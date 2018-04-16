@@ -73,8 +73,8 @@ while (~done)
     
     % Compute gradient:
     etx = exp(obj.wts*X1(j,:)'); % compute e^theta*x
-    grad = ((-X1(j,:)*Y(j) + X1(j,:)*etx*(Y(j) - 1))... 
-        ./ (etx + 1)) + (stepsize * sum(2*obj.wts))
+    grad = ((X1(j,:) * (etx - Y(j,:) - (Y(j,:)*etx)))...
+        / (1 + etx)) + (stepsize * sum(2*obj.wts))
     
     obj.wts = obj.wts - step * grad;% take a step down the gradient
   end;
@@ -82,8 +82,6 @@ while (~done)
   if iter >= stopIter
       done = true;
   end;
-  
-  %%% TODO: Check for stopping conditions
 
   wtsold = obj.wts;
   iter = iter + 1;

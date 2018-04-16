@@ -476,6 +476,20 @@ plot2DLinear(learnerB, XB, YB);
 % Simplifies to: 
 %
 % $$ -\frac{x^{j} e^{\theta x^{j}} \left( y^{j} - 1 \right) }{e^{\theta x^{j}} + 1} $$
+% 
+% Now find partial derivative: 
+% 
+% $$ \frac{\partial}{\partial \theta} \alpha \sum_i \theta_i ^2 $$
+% 
+% $$ \alpha \sum_i \frac{\partial}{\partial \theta} \theta_i ^2 $$
+% 
+% $$ \alpha \sum_i 2\theta_i $$
+% 
+% Add together to find $$ \frac{dJ}{d\theta} $$: 
+%
+% $$ \frac{-x^{j} y^{j} }{1+e^{\theta x^{j}}} - \frac{x^{j} e^{\theta x^{j}} \left( y^{j} - 1 \right) }{e^{\theta x^{j}} + 1} + \alpha \sum_i 2\theta_i $$
+% 
+% $$ \frac{x^{j} \left( e^{\theta x^{j}} - y^{j} - y^{j}e^{\theta x^{j}} \right) }{1+e^{\theta x^{j}}} + \alpha \sum_i 2\theta_i$$
 
 %%
 % *(e) Complete your train.m function to perform stochastic gradient descent
@@ -483,12 +497,22 @@ plot2DLinear(learnerB, XB, YB);
 
 %%
 % *(1) computing the surrogate loss function at each iteration*
+
+Jsur(iter) = 1/n*sum((-X(:,2)'*log((1+exp(-obj.wts.*X(:,1))).^-1))...
+    - ((1-X(:,2))'*log(1-((1+(exp(-obj.wts.*X(:,1)))).^-1)))... 
+    + (stepsize*sum(obj.wts.^2))...
+    );  %compute surrogate (neg log likelihood) loss
+
 %%
 % *(2) computing the prediction and gradient associated with each data point*
 %%
 % *(3) a gradient step on the parameters $\theta$*
 %%
 % *(4) a stopping criterion.*
+
+if iter >= stopIter
+    done = true;
+end;
 
 %%
 % *(f) Run your logistic regression classifier on both data sets (A and B);
